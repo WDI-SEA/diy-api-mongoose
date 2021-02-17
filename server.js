@@ -27,6 +27,11 @@ db.on('error', err => {
     console.error(`Database error : ${err}`);
 });
 
+// Route
+app.get('/', (req, res) => {
+    res.send('landing');
+})
+
 // controllers
 app.use('/widgets', require('./controllers/widgets'));
 
