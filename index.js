@@ -1,25 +1,16 @@
-const express = require('express')
+const express = requires('express')
+const cors = require('cors')
+
 const app = express()
 
-app.use(express.urlencoded({ extended: false}))
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+app.use(cors())
 
-// Mongoose Stuff
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/faveCharacters')
+app.use('/v1/FaveChars', require('./contollers/v1/bounties'))
 
-//shorcut to mongoose.connection object
-const db = mongoose.connection
-
-db.once('open', function(){
-    console.log(`Connected to MongoDB at ${port}`)
+app.get('*', (req, res) => {
+    res.status(404).send({message: 'NOT FOUND!'})
 })
 
-db.on('error', function(err){
-    console.log(`Database error:${err}`)
-})
-
-app.get('/', function(req, res) {
-    res.send('Hi')
-})
-
-app.listen(3000)
+app.listen(3000, () =>{console.log('App is listening on Port 3K')})
