@@ -29,8 +29,27 @@ router.get('/', (req, res) =>{
 })
 
 //Post --> create '/'
+router.post('/', (req,res) =>{
+    Pet.create(req.body, (err, pet ) =>{
+        if(err){
+            console.error(`❌ Error in pets create route:\n${err}`)
+            res.status(500).json({ error: 'Error in pets create route'})
+        }
+        res.json({ pet })
+    })
+} )
 
-//GET --> Getail/show '/:id'
+//GET --> detail/show '/:id'
+
+router.get('/:id', (req, res) =>{
+    Pet.findById(req.params.id, (err, user) =>{
+        if(err){
+            console.error(`❌ Error in pets details route:\n${err}`)
+            res.status(500).json({ error: 'Error in pets details route'})
+        }
+        res.json({ pet })
+    })
+})
 
 //PUT  --> Update '/:id'
 
