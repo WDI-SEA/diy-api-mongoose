@@ -58,7 +58,9 @@ Character.insertMany(chars)
     process.exit()
 })
 
+// In terminal:
 // brew services start mongodb-communtiy@4.4
+// mongo
 // show dbs
 // use genshinCharacters
 // show collections
