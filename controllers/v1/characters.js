@@ -51,4 +51,43 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// Delete a specific character.
+/*
+router.delete('/:id', (req, res) => {
+    db.Character.findByIdAndDelete(req.params.id)
+    .then( foundChar => {
+        res.status(204).send({ message: `Deleted ${foundChar.name} with id ${foundChar._id}`})
+    }).catch( err => {
+        console.log(`Error when deleting ${foundChar.name} with id ${foundChar._id}: ${err}`)
+        res.status(503).send({ message: 'Server-side error.'})
+    })
+})
+*/
+
+// https://www.geeksforgeeks.org/mongoose-findbyidanddelete-function/#:~:text=The%20findByIdAndDelete()%20function%20is,if%20any)%20to%20the%20callback
+/* 
+router.delete('/:id', (req, res) => {
+    db.Character.findByIdAndDelete(req.params.id, (err, foundChar) => {
+        if (err) {
+            console.log(`Error when deleting ${foundChar}: ${err}`)
+            res.status(503).send({ message: 'Server-side error.'})
+        } else {
+            res.status(204).send({ message: `Deleted ${foundChar}`})
+        }
+    })
+})
+*/
+
+// Unable to console.log foundChar but am still able to delete. 
+router.delete('/:id', (req, res) => {
+    db.Character.findByIdAndDelete(req.params.id, (err, foundChar) => {
+        if (err) {
+            console.log(`Error when deleting ${foundChar}: ${err}`)
+            res.status(503).send({ message: 'Server-side error.'})
+        } else {
+            res.status(204).send({ message: `Deleted ${foundChar}`})
+        }
+    })
+})
+
 module.exports = router
