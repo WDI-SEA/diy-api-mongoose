@@ -25,15 +25,26 @@ APP.get('/', (req, res) => {
   res.json({ message: '🎹 👻 🎛 '})
 });
 
-// //Create attempt prior to router
+// // //Create attempt prior to router
 // const Synth = require('./models/synth');
 
 // Synth.create({
-//   name: 'TB 303',
+//   name: 'TR-909',
 //   manufacturer: 'Roland',
-//   kind: 'Mono Bass Synthesizer',
-//   releaseYear: 1982,
-//   notableArtists: ['Phuture', 'Plastikman', 'Larry Heard', 'Adonis']
+//   kind: 'Drum Machine',
+//   releaseYear: 1983,
+//   notableArtists: ['Jeff Mills', 'Mike Banks', 'Shawn Rudiman']
+// }, (err, synth) => {
+//   if (err) return console.error(`🤬 Troube in create:\n${err}`)
+//     console.log(`${synth.name} has been created`)
+// });
+
+// Synth.create({
+//   name: 'TR-808',
+//   manufacturer: 'Roland',
+//   kind: 'Drum Machine',
+//   releaseYear: 1980,
+//   notableArtists: ['Drexcyia', 'Egyptian Lover', 'Drexcyia']
 // }, (err, synth) => {
 //   if (err) return console.error(`🤬 Troube in create:\n${err}`)
 //     console.log(`${synth.name} has been created`)
