@@ -3,7 +3,23 @@ const db = require('../../models')
 
 // http://localhost:3000/v1/characters/
 router.get('/', (req, res) => {
-    
+    db.Character.find() 
+    .then(chars => {
+        res.status(200).send(chars)
+    })
+    .catch(err => {
+        console.log(`Error in GET /v1/characters: ${err}`)
+        res.status(503).send({ message: 'Database asleep?' })
+    })
 })
+
+// Error first handling method of writing code: 
+// router.get('/', (req, res) => {
+//     db.find.Character({}, (err, chars) => {
+//         if (err) res.send(503).send({ message: 'DB asleep?'})
+//         res.status(200).send(chars)
+//     })
+
+// })
 
 module.exports = router
