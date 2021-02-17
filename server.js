@@ -28,4 +28,4 @@ APP.get('/', (req, res) => {
 // app.use /synths
 
 //listen on port
-app.listen (3000 || process.env.PORT, () => console.log(`You're listening to the smooth sounds of port ${ 3000 || process.env.PORT}`));
+APP.listen (3000 || process.env.PORT, () => console.log(`You're listening to the smooth sounds of port ${ 3000 || process.env.PORT}`));
