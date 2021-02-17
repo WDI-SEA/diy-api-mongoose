@@ -2,8 +2,20 @@ const express = require('express');
 const Widget = require('../models/widget');
 const router = express.Router();
 
+// Widget.create({
+//     name: 'test2',
+//     widgets: 2,
+//     purpose: 'test'
+// }, (err, widget) => {
+//     if (err) {
+//         console.error(`Trouble creating: ${err}`)
+//     } else {
+//         console.log(`${widget.name} has been created`)
+//     }
+// })
 
-router.get('/widgets', (req, res) => {
+
+router.get('/', (req, res) => {
     Widget.find({}, (err, widgets) => {
         if (err) {
             console.error(`Error in widgets Index route: ${err}`);
@@ -13,7 +25,7 @@ router.get('/widgets', (req, res) => {
     });
 });
 
-router.get('/widgets/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Widget.findById(req.params.id, (err, widget) => {
         if (err) {
             console.error(`Error in widgets Detail route: ${err}`);
@@ -23,7 +35,7 @@ router.get('/widgets/:id', (req, res) => {
     });
 });
 
-router.post('/widgets', (req, res) => {
+router.post('/', (req, res) => {
     Widget.create(req.body, (err, widget) => {
         if (err) {
             console.error(`Error in widgets Create route: ${err}`);
@@ -33,7 +45,7 @@ router.post('/widgets', (req, res) => {
     });
 });
 
-router.put('/widgets/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     Widget.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -48,7 +60,7 @@ router.put('/widgets/:id', (req, res) => {
     );
 });
 
-router.delete('/widgets/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Widget.findByIdAndDelete(req.params.id, (err, widget) => {
         if (err) {
             console.error(`Error in widgets Delete route: ${err}`);
