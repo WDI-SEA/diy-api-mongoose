@@ -17,5 +17,5 @@ const pkdStorySchema = new mongoose.Schema({
     movieYear: Number,
     bookYear: Number
 })
-
-module.exports = mongoose.model('PkdStory', pkdStorySchema)
+const pkdStory = mongoose.model('pkdStory', pkdStorySchema)
+module.exports = pkdStory
