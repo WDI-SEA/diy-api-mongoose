@@ -70,4 +70,14 @@ router.put('/:id', (req, res) =>{
 
 //Delete --> delete '/:id'
 
+router.delete('/:id', (req, res) =>{
+    Pet.findByIdAndRemove(req.params.id, (err, pet) =>{
+        if(err){
+            console.error(`❌ Error in pets delete route:\n${err}`)
+            res.status(500).json({ error: 'Error in pets delete route'})
+        }
+        res.json({ pet })
+    })
+})
+
 module.exports = router
