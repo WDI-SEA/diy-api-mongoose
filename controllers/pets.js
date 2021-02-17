@@ -42,7 +42,7 @@ router.post('/', (req,res) =>{
 //GET --> detail/show '/:id'
 
 router.get('/:id', (req, res) =>{
-    Pet.findById(req.params.id, (err, user) =>{
+    Pet.findById(req.params.id, (err, pet) =>{
         if(err){
             console.error(`❌ Error in pets details route:\n${err}`)
             res.status(500).json({ error: 'Error in pets details route'})
@@ -52,6 +52,21 @@ router.get('/:id', (req, res) =>{
 })
 
 //PUT  --> Update '/:id'
+
+router.put('/:id', (req, res) =>{
+    Pet.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {new: true },
+        (err, pet) =>{
+            if(err){
+                console.error(`❌ Error in pets update route:\n${err}`)
+                res.status(500).json({ error: 'Error in pets update route'})
+            }
+            res.json({ pet })
+        }
+    )
+})
 
 //Delete --> delete '/:id'
 
