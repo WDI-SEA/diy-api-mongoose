@@ -19,7 +19,21 @@ router.get('/', (req, res) => {
 //         if (err) res.send(503).send({ message: 'DB asleep?'})
 //         res.status(200).send(chars)
 //     })
-
 // })
+
+// Create a new character!
+router.post('/', (req, res) => {
+    db.Character.create(req.body)
+    .then(newChar => {
+        res.status(201).send(newChar)
+    }).catch( err => {
+        console.log(`Error in POST /v1/characters: ${err}`)
+        if (err.name === 'ValidationError') {
+            res.status(406).send({ message: 'Validation Error: New character must have a name.' })
+        } else {
+            res.status(503).send({ message: 'Something wrong with the DB' })
+        }
+    })
+})
 
 module.exports = router

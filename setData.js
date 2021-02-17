@@ -22,8 +22,8 @@ const chars = [
         DEF: 1156,
         HP: 21670,
         EM: 44,
-        CritRate: '52.8%',
-        CritDamage: '80.35%'
+        critRate: '52.8%',
+        critDamage: '80.35%'
     },
     {
         name: 'Xiao',
@@ -35,8 +35,8 @@ const chars = [
         DEF: 774,
         HP: 17716,
         EM: 180,
-        CritRate: '66.5%',
-        CritDamage: '132.4%'
+        critRate: '66.5%',
+        critDamage: '132.4%'
     },
     {
         name: 'Sucrose',
@@ -44,8 +44,8 @@ const chars = [
         DEF: 814,
         HP: 10545,
         EM: 720,
-        CritRate: '22.9%',
-        CritDamage: '50.0%'
+        critRate: '22.9%',
+        critDamage: '50.0%'
     }
 ]
 

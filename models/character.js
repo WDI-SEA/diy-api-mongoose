@@ -5,16 +5,16 @@ const characterSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Vision: String,
+    vision: String,
     ATK: Number,
     DEF: Number,
     HP: Number,
     EM: Number,
-    CritRate: {
+    critRate: {
         type: String,
         default: '5%'
     },
-    CritDamage: {
+    critDamage: {
         type: String,
         default: '50%'
     }
