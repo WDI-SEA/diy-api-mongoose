@@ -20,6 +20,6 @@ const widgetSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Widget = mongoose.model('Widget', userSchema);
+const Widget = mongoose.model('Widget', widgetSchema);
 
 module.exports = Widget;
