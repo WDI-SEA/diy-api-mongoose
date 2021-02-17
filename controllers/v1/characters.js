@@ -36,4 +36,19 @@ router.post('/', (req, res) => {
     })
 })
 
+// Show each character.
+router.get('/:id', (req, res) => {
+    db.Character.findById(req.params.id)
+    .then( foundChar => {
+        if (foundChar) {
+            res.status(200).send(foundChar)
+        } else {
+            res.status(404).send({ message: 'Character not found.'})
+        }
+    }).catch( err => {
+        console.loglog(`Error fetching one character: ${err}`)
+        res.status(503).send({ message: 'Find Character service unavailable.' })
+    })
+})
+
 module.exports = router
