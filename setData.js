@@ -57,3 +57,9 @@ Character.insertMany(chars)
     console.log(err)
     process.exit()
 })
+
+// brew services start mongodb-communtiy@4.4
+// show dbs
+// use genshinCharacters
+// show collections
+// db.characters.find().pretty()
