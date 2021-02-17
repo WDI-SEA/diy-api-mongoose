@@ -25,20 +25,21 @@ APP.get('/', (req, res) => {
   res.json({ message: '🎹 👻 🎛 '})
 });
 
-//Create attempt prior to router
-const Synth = require('./models/synth');
+// //Create attempt prior to router
+// const Synth = require('./models/synth');
 
-Synth.create({
-  name: 'TB 303',
-  manufacturer: 'Roland',
-  kind: 'Mono Bass Synthesizer',
-  releaseYear: 1982,
-  notableArtists: ['Phuture', 'Plastikman', 'Larry Heard', 'Adonis']
-}, (err, synth) => {
-  if (err) return console.error(`🤬 Troube in create:\n${err}`)
-    console.log(`${synth.name} has been created`)
-});
+// Synth.create({
+//   name: 'TB 303',
+//   manufacturer: 'Roland',
+//   kind: 'Mono Bass Synthesizer',
+//   releaseYear: 1982,
+//   notableArtists: ['Phuture', 'Plastikman', 'Larry Heard', 'Adonis']
+// }, (err, synth) => {
+//   if (err) return console.error(`🤬 Troube in create:\n${err}`)
+//     console.log(`${synth.name} has been created`)
+// });
 // app.use /synths
+APP.use('/synths', (require('./controllers/synths')));
 
 //listen on port
 APP.listen (3000 || process.env.PORT, () => console.log(`You're listening to the smooth sounds of port ${ 3000 || process.env.PORT}`));
