@@ -25,6 +25,19 @@ APP.get('/', (req, res) => {
   res.json({ message: '🎹 👻 🎛 '})
 });
 
+//Create attempt prior to router
+const Synth = require('./models/synth');
+
+Synth.create({
+  name: 'TB 303',
+  manufacturer: 'Roland',
+  kind: 'Mono Bass Synthesizer',
+  releaseYear: 1982,
+  notableArtists: ['Phuture', 'Plastikman', 'Larry Heard', 'Adonis']
+}, (err, synth) => {
+  if (err) return console.error(`🤬 Troube in create:\n${err}`)
+    console.log(`${synth.name} has been created`)
+});
 // app.use /synths
 
 //listen on port

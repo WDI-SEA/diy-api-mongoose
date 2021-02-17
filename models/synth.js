@@ -24,7 +24,7 @@ const synthSchema = new MONGOOSE.Schema({
 // methods
 
 // name model
-const Synth = mongoose.model('Synth', synthSchema);
+const Synth = MONGOOSE.model('Synth', synthSchema);
 
 // export the model 
 module.exports = Synth;
