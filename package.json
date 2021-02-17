@@ -1,0 +1,24 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "## **Deliverable**:",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kys3923/diy-api-mongoose.git"
+  },
+  "author": "Youngsang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kys3923/diy-api-mongoose/issues"
+  },
+  "homepage": "https://github.com/kys3923/diy-api-mongoose#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.16"
+  }
+}
