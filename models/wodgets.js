@@ -6,12 +6,12 @@ const wodgetsSchema = new mongoose.Schema({
 
     },
     wodgets: {
-        type: integer
+        type: Number
     }, 
     purpose: {
-        type: string
+        type: String
     },
     
 })
 
-module.exports = mongoose.model('People', peopleSchema)
+module.exports = mongoose.model('Wodget', wodgetsSchema)

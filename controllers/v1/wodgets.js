@@ -4,13 +4,29 @@ const db = require('../../models')
 router.get('/', (req, res) => {
     db.Wodgets.find()
         .then(wodgets => {
-            res.status(200).send(people)
+            res.status(200).send(wodgets)
         })
         .catch(err => {
             console.log(`Error in GET /wodgets: ${err}`)
             res.send(503).send({ message: 'Database Asleep?' })
         })
 })
+
+router.get('/:id', (req, res) => {
+    db.Wodgets.findById(req.params.id)
+    .then(wodgets => {
+        if(wodgets){
+            res.status(200).send(wodgets)
+        } else {
+            res.status(404).send({message: 'Resource not Found'})
+        }
+    })
+    .catch(err => {
+        console.log(`error fetching ONE bounty: ${err}`)
+        res.status(503).send({ message: 'Service unavailable' })
+    })
+})
+
 
 
 router.post('/', (req, res) => {
