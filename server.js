@@ -24,4 +24,6 @@ app.get('/', (req, res) =>{
     res.json({message: '🐈 🐶'})
 })
 
+app.use('/pets', require('./controllers/pets'))
+
 app.listen(3000 || process.env.PORT, () => console.log(`👻 You are listening to the smooth sounds of port ${3000 || process.env.PORT}`))
