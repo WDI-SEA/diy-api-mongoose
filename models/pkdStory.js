@@ -1,21 +1,28 @@
 const mongoose = require('mongoose')
-const router = require('../controllers/v1/pkdStories')
+const router = require('../controllers/v1/pkdMovies')
 
-const pkdStorySchema = new mongoose.Schema({
+const bookSchema = new mongoose.Schema({
+    book: {
+        type: String
+    }
+})
+
+const directorSchema = new mongoose.Schema({
+    name: {
+        type: String
+    },
+    projects: Array
+})
+
+const adaptationSchema = new mongoose.Schema({
     movie: {
         type: String,
-        required: true,
-        minlength: 2,
-        maxlength: 100
+        required: true
     },
-    book: {
-        type: String,
-        required: true,
-        minlength: 2,
-        maxlength: 100
-    },
-    movieYear: Number,
-    bookYear: Number
+    basedOn: bookSchema,
+    directedBy: directorSchema
 })
-const pkdStory = mongoose.model('pkdStory', pkdStorySchema)
-module.exports = pkdStory
+
+// module.exports = mongoose.model('Book', bookSchema)
+// module.exports = mongoose.model('Director', directorSchema)
+module.exports = mongoose.model('Adaptation', adaptationSchema)

@@ -2,7 +2,7 @@ const router = require('express').Router()
 const db = require('../../models')
 
 router.get('/', (req, res) => {
-    db.pkdStory.find()
+    db.Adaptation.find()
     .then(response => {
         console.log(response)
         res.status(200).send(response)
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 // create a new entry
 router.post('/', (req, res) => {
-    db.pkdStory.create(req.body)
+    db.Adaptation.create(req.body)
     .then(newStory => {
         res.status(201).send(newStory)
     })
@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 
 //show one story's data
 router.get('/:id', (req, res) => {
-    db.pkdStory.findById(req.params.id)
+    db.Adaptation.findById(req.params.id)
     .then(story => {
         if(story){
             res.status(200).send(story)
@@ -46,21 +46,9 @@ router.get('/:id', (req, res) => {
     })
 })
 
-//delete a story
-router.delete('/:id', (req, res) => {
-    db.pkdStory.findByIdAndDelete(req.params.id)
-    .then(() => {
-        res.status(200).send({message: 'Entry successfully removed!'})
-    })
-    .catch(err => {
-        console.log(`Error when deleting ONE story: ${err}`)
-        res.status(503).send({message: 'Server-side error'})
-    })
-})
-
 //update a story
 router.put('/:id', (req, res) => {
-    db.pkdStory.findOneAndUpdate({
+    db.Adaptation.findOneAndUpdate({
         _id: req.params.id
     }, req.body, {
         new: true
@@ -71,6 +59,18 @@ router.put('/:id', (req, res) => {
     .catch(err => {
         console.log(`error when updating a single story: ${err}`)
         res.status(503).send({message: 'Server Error'})
+    })
+})
+
+//delete a story
+router.delete('/:id', (req, res) => {
+    db.Adaptation.findByIdAndDelete(req.params.id)
+    .then(() => {
+        res.status(200).send({message: 'Entry successfully removed!'})
+    })
+    .catch(err => {
+        console.log(`Error when deleting ONE story: ${err}`)
+        res.status(503).send({message: 'Server-side error'})
     })
 })
 
