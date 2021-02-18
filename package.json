@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.16"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "diy-api-mongoose",
+  "description": "## **Deliverable**:",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdJaPe/diy-api-mongoose.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdJaPe/diy-api-mongoose/issues"
+  },
+  "homepage": "https://github.com/EdJaPe/diy-api-mongoose#readme"
+}
