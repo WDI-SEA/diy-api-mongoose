@@ -1,5 +1,26 @@
 const mongoose = require('mongoose')
 
+const spellSchema = new mongoose.Schema({
+    user_id: {
+        type: String,
+        required: true
+    },
+    spellName: {
+        type: String,
+        required: true
+    },
+    level: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 9
+    },
+    desc: {
+        type: String,
+        required: true
+    }
+})
+
 const characterSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -15,7 +36,8 @@ const characterSchema = new mongoose.Schema({
     class: {
         type: String,
         required: true
-    }
+    },
+    spells: [spellSchema]
 })
 
 module.exports = mongoose.model('Character', characterSchema)

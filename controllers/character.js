@@ -49,10 +49,40 @@ router.put('/:id',(req, res) => {
     })
 })
 
+router.put('/spell/:id', (req, res) => {
+    db.character.findByIdAndUpdate(
+        req.params.id,
+        { $push: { spells: req.body } },
+        { new: true}
+    )
+    .then(updatedChar => {
+        res.status(201).send(updatedChar)
+    })
+    .catch(err => {
+        console.log('Error: ' + err)
+        res.send('Oops')
+    })
+})
+
 router.delete('/:id', (req, res) => {
     db.character.findByIdAndDelete( req.params.id )
     .then(() => {
         res.status(200).send({ message: 'Successfully deleted' })
+    })
+    .catch(err => {
+        console.log('Error: ' + err)
+        res.send('Oops')
+    })
+})
+
+router.delete('/spell/:id', (req, res) => {
+    db.character.findByIdAndUpdate(
+        req.params.id,
+        { $pull: { spells: { spellName: req.body.spellName } } },
+        { new: true }
+    )
+    .then(updatedChar => {
+        res.status(201).send(updatedChar)
     })
     .catch(err => {
         console.log('Error: ' + err)
