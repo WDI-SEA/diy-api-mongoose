@@ -15,3 +15,6 @@ app.get('*', (req, res) => {
 })
 
 app.listen(3000, () => { console.log('App is listening on Port 3k')})
+
+// One to many: https://github.com/WDI-SEA/mongoose-relationships
+// Yasaman's DIY API: https://github.com/YasamanForouzesh/diy-api-mongoose

@@ -85,6 +85,7 @@ router.delete('/:id', (req, res) => {
             console.log(`Error when deleting ${foundChar}: ${err}`)
             res.status(503).send({ message: 'Server-side error.'})
         } else {
+            console.log(`💫 Found and then deleted char ${foundChar}`)
             res.status(204).send({ message: `Deleted ${foundChar}`})
         }
     })

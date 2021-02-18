@@ -7,3 +7,4 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/genshinCharacte
 
 // Import character scheme from ./character.js and then export it as '.Character'
 module.exports.Character = require('./character')
+module.exports.Talent = require('./talent')
