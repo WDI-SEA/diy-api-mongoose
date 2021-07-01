@@ -40,7 +40,8 @@ app.post('/blog', (req, res) => {
 // GET /blog/:id -- show one blog post
 app.get('/blog/:id', (req, res) => {
     db.Blog.findById(req.params.id)
-    .then(() => {
+    .then((result) => {
+        res.json(result)
         res.redirect(`/blog/${req.params.id}`)
     })
     .catch(err => {
