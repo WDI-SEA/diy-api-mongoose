@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 // require the databse
 const db = require('./models')
@@ -11,6 +12,7 @@ const PORT = process.env.PORT
 
 //request body middleware
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 
 // test index route / -- return a server message
 app.get('/', (req, res) => {
@@ -46,7 +48,7 @@ app.post('/blog', async (req, res) => {
     try{
         const newPost = await db.Post.create({
             name: req.body.name,
-            title: req.body.title ,
+            title: req.body.title,
             content: req.body.content
         })
         await newPost.save()
@@ -74,7 +76,7 @@ app.get('/blog/:id', async (req, res) => {
 
 
 
-//PUT /blog:id -- UPDATE one bountie and redirect to /blog
+//PUT /blog:id -- UPDATE one post and redirect to /blog
 // app.put('/blog/:id', (req, res) => {
 //     db.Post.findById(req.params.id)
 //     .then(foundPost => {
@@ -97,7 +99,7 @@ app.get('/blog/:id', async (req, res) => {
 app.put('/blog/:id', async (req, res) => {
     try{
         const updatePost = await db.Post.findById(req.params.id)
-            updatePost.name = req.body.name
+            updatePost.name = req.body.name,
             updatePost.title = req.body.title,
             updatePost.content = req.body.content
 
