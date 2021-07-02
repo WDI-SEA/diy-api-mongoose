@@ -27,7 +27,7 @@ app.post('/blog', async (req, res) => {
     // res.send({ msg: '👋 Hello, welcome to my Blog API - this is BLOG POST 👋'})
     const createPost = await db.Blog.create(req.body)
     res.send(createPost)
-console.log(req.body)
+    console.log(req.body)
 })
 
 app.get('/blog/:id', async (req, res) => {
