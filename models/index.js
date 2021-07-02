@@ -10,20 +10,16 @@ const connect = () => {
         useCreateIndex: true,
         useFindAndModify: false
     })
-    
     const db = mongoose.connection
     
-    db.once('open', () => {
-        console.log(`MongoDB connected on ${db.host}:${db.port}`)
-    })
-    
-    db.on('error', err => {
-        console.log(`Error\n${err}`)
-    })
+    db.once('open', () => console.log(`MongoDB connected on ${db.host}:${db.port}`))
+    db.on('error', err => console.log(`Error\n${err}`))
 }
 
 module.exports = {
     connect,
     Blog: mongoose.model('Blog', require('./Blog.js'))
 }
+
+// module.exports.Blog = require('./Blog.js')
 

@@ -15,4 +15,14 @@ const blogCRUD = async () => {
     }
 }
 
+// const blogCRUD = () => {
+//     db.Blog.create({
+//         name: "Test Four",
+//         title: 4,
+//         content: "Also a test."
+//     })
+//     .then(newPost => console.log(newPost))
+//     .catch(err => log(err))
+// }
+
 blogCRUD()
