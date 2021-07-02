@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 
+
 // GET /blog - return all posts
 router.get('/', async (req,res) => {
     try {
