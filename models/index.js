@@ -1,16 +1,22 @@
 // this page has the mongo connection stuff before hitting the mongo db
 const mongoose = require('mongoose')
+require ('dotenv').config()
 
 const connect = () => {
-    mongoose.connect(), {
+    const uri = process.env.ATLAS_URI
+
+    // connect mongoose to atlas
+    mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindandModify: false
-    }
+    useFindAndModify: false
+    })
+
     const db = mongoose.connection
+
     db.once('open', () => {
-        console.log(`mongoDB connection ${db.host}:${db.port}`)
+        console.log(`mongoDB connected on ${db.host}:${db.port}`)
     })
     db.on('error', err => {
         console.log('oh no!')

@@ -1,25 +1,13 @@
 const express = require('express')
 const db = require('./models')
 const app = express()
-
 db.connect()
 
 PORT = 3001
 app.use(express.urlencoded({extended: false}))
 
-Blog.create({
-  title: 'This is a blog post',
-  author: 'Ben'
-}, (error, Blog) => {
-  if(error){
-    console.log(error)
-  } else {
-    console.log(blog.title)
-  }
-}) 
-
 // GET (index) route for /Blog.  READ all blog posts.
-app.get('./Blog', async (req, res) => {
+app.get('/Blog', async (req, res) => {
     try {
         const blogs = await db.Blog.find({})
         res.json({ blogs })
@@ -45,12 +33,7 @@ app.post('/Blog', (req, res) => {
 app.get('/Blog/:id', (req, res) => {
     db.Blog.findById(req.params.id)
       .then(foundBlog => {
-          foundBlog.title = req.body.title
-          
-          foundBlog.save()
-          .then(() => {
-            res.redirect('/blog')
-          })
+          res.json(foundBlog) 
       })
 })  
     
@@ -77,6 +60,6 @@ app.delete('/Blog/:id', (req, res) => {
   })
 
 
-app.listen (3001, () => {
+app.listen (process.env.PORT || 3001, () => {
     console.log('listening')
   })
