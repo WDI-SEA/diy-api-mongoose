@@ -4,20 +4,13 @@ const mongoose = require('mongoose')
 //define mongoose schema
 const PostSchema = new mongoose.Schema({
     name: {
-        type: String,
-        //Default is false but you can add required if you need it
-        required: true
+        type: String
     },
     title : {
-        type: String,
-        required: true
+        type: String
     },
     content : {
-        type: String,
-        //can add min/max of the string entered
-        required: true,
-        minlength: 2,
-        maxlength: 100
+        type: String
     }
 })
 
