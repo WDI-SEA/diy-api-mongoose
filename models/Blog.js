@@ -7,7 +7,7 @@ BlogSchema = new mongoose.Schema({
         type: String
     },
     title: {
-        type: Integer
+        type: Number
     },
     content: {
         type: String
