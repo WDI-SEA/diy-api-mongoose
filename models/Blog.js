@@ -3,10 +3,17 @@ let db = require('./models')
 let router = require('express').Router()
 
 // set up array of information 
+const blogSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true},
+    author: {
+        type: String
+    },
+    published: {
+        type: Date
+    }
+})
 
-// blog name:
-// blog author: 
-// date published: 
-// schema/structure of db
-
-module.exports.Blog = require('./Blog.js')
+// const Blog = mongoose.model('Blog', blogSchema)
+module.exports = blogSchema
