@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // define a mongoose schema
 const PostSchema = new mongoose.Schema({
-    name: {
+    author: {
         type: String,
         required: true
     },
