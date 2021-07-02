@@ -7,6 +7,8 @@ db.connect()
 const app = express()
 const PORT = process.env.PORT || 3000
 
+app.use(express.urlencoded({ extended: false }))
+
 // controllers
 app.use('/blog', require('./controllers/blog'))
 
