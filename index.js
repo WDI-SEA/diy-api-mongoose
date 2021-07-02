@@ -1,6 +1,7 @@
 require('dotenv').config()
 // require express
 const express = require('express')
+const cors = require('cors')
 
 // require rowdy
 const rowdy = require('rowdy-logger')
@@ -17,6 +18,7 @@ const PORT = process.env.PORT
 const rowdyResults = rowdy.begin(app)
 
 // configure middlewares
+app.use(cors())
 app.use('/blog', require('./controllers/v1/blog'))
 
 // app listen
