@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../models')
+const db = require('../../models')
 
 // configure middlewares
 router.use(express.urlencoded({ extended: false }))

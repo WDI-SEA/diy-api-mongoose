@@ -17,7 +17,7 @@ const PORT = process.env.PORT
 const rowdyResults = rowdy.begin(app)
 
 // configure middlewares
-app.use('/blog', require('./controller/blog'))
+app.use('/blog', require('./controller/v1/blog'))
 
 // app listen
 app.listen(PORT, () => {
