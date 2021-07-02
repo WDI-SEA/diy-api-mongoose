@@ -30,5 +30,5 @@ const connect = () => {
 // export a function to connect
 module.exports = {
     connect,
-    Post: mongoose.model('Post', require('./Posts.js'))
+    Post: mongoose.model('blogpost', require('./Posts.js'))
 }

@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // test index route / -- return a server message
 app.get('/', (req, res) => {
-    res.json({ msg: 'hello, this the blogpost API'})
+    res.json({ msg: "Ken's blogpost API"})
 })
 
 // GET /blog -- READ all blog from db
