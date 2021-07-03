@@ -1,13 +1,15 @@
 const express = require('express')
 const db = require('./models')
 db.connect()
+const cors = require('cors')
 
 // configure express app
 const app = express()
-const PORT = 3000
+const PORT = 3001
 
 // middleware - tell express how to handle json
 app.use(express.json())
+app.use (cors())
 
 // test index route '/' -- return a server message
 app.get('/', (req, res) => {
@@ -49,8 +51,12 @@ app.delete('/blog/:id', async (req, res) => {
     // delete one post
     // res.send({ msg: '👋 Hello, welcome to my Blog API - this is DELETE ONE POST 👋'})
     const deleteOnePost = await db.Blog.findByIdAndDelete(req.params.id)
-    res.send(deleteOnePost)
+    .then(res.send('Deleted post'))
+    .catch(err => console.log(err))
+
+    // res.send(deleteOnePost)
 })
+
 
 //////////////////////
 
