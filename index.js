@@ -70,7 +70,7 @@ app.get('/blog/:id', async (req, res) => {
             })
         }
     }catch(err) {
-        console.log(error)
+        console.log(err)
     }
 })
 
