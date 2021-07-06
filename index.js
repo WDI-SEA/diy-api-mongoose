@@ -2,12 +2,15 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const bodyParser = require("body-parser")
 
 const db = require('./models')
 db.connect()
 
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 const PORT = 4000
 const log = console.log
@@ -27,7 +30,8 @@ app.post('/blog', (req, res) => {
         author: req.body.author,
         content: req.body.content
     })
-    .then(() => res.redirect('/blog'))
+    // .then(() => res.redirect('/blog'))
+    .then(result => res.json(result))
     .catch(err => log(err))
 })
 
@@ -49,10 +53,16 @@ app.put('/blog/:id', (req, res) => {
         foundPost.author = req.body.author
         foundPost.content = req.body.content
         foundPost.save()
-        .then(() => res.redirect(`/blog/${req.params.id}`))
+        .then(result => res.json(result))
     })
     .catch(err => log(err))
 })
+
+// app.put('/blog/:id', (req, res) => {
+//     db.Blog.findOneAndUpdate({_id: req.body._id}, {$set: req.body.data})
+//     .then(() => res.redirect(`/blog`))
+//     .catch(err => log(err))
+// })
 
 // DELETE /blog/:id -- delete one blog post
 app.delete('/blog/:id', (req, res) => {
