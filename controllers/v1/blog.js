@@ -4,6 +4,7 @@ const db = require('../../models')
 
 // configure middlewares
 router.use(express.urlencoded({ extended: false }))
+router.use(express.json())
 
 // GET /blog -- READ list all blog posts
 router.get('/', async (req, res) => {
@@ -44,9 +45,11 @@ router.get('/:id', async (req, res) => {
 
 // PUT /blog/:id -- UPDATE one blog post, and redirect to /blog
 router.put('/:id', async (req, res) => {
+    console.log(req.body)
     try {
         const postToUpdate = await db.Post.findById(req.params.id)
         postToUpdate.content = req.body.content
+        postToUpdate.title = req.body.title
         await postToUpdate.save()
 
         res.redirect('/blog')
