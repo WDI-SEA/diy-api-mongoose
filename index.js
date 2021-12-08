@@ -3,7 +3,7 @@ const app = express()
 // const db = require('./models')
 
 app.use(express.urlencoded({extended:false}))
-// app.use('/bounties', require('./controllers/bounty'))
+app.use('/artist', require('./controllers/artist'))
 
 app.get('/', (req, res) => {
     res.json({message: 'Some Musical Arist Home Route'})
