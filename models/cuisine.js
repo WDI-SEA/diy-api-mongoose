@@ -7,10 +7,7 @@ const cuisineSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 100
     },
-    dishType: {
-        type: String,
-        require: true
-    },
+    dishType: {type: String},
     description: {
         type: String,
         require: true

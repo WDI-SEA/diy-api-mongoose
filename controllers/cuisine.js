@@ -30,6 +30,18 @@ router.post('/', (req, res) => {
 })
 
 // edit (PUT) a new dish
+router.put('/:id', (req, res) => {
+    db.Cuisine.findOneAndUpdate({_id: req.params.id},
+        req.body,
+        {new: true})
+        .then(updatedCuisine => {
+            res.json(updatedCuisine)
+        })
+        .catch(err => {
+            console.error
+            res.status(503).json({message: 'Server Error'})
+        })
+})
 
 // show (GET) details of a dish
 
