@@ -11,3 +11,5 @@ db.once('open', ()=> {
 db.on('open', (err) => {
     console.error('Database error: '. err)
 })
+
+module.exports.Blog = require('./blog')
