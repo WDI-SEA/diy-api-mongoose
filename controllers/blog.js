@@ -12,3 +12,19 @@ router.get('/', (req, res) => {
             res.status(503).json({ message: 'Database asleep?' })
         })
 })
+
+// POST a new blog
+router.post('/', (req, res) => {
+    db.Blog.create(req.body)
+        .then(createdBlog => {
+            res.status(200).json(createdBlog)
+        })
+        .catch(err => {
+            console.log('Error while creating', err)
+            if (err.name === 'ValidationError') {
+                res.status(406).json({ message: 'Validation Error' })
+            } else {
+                res.status(503).json({ message: 'Database or server error!' })
+            }
+        })
+})
