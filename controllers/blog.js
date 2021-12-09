@@ -3,12 +3,25 @@ const db = require('../models')
 
 //index
 router.get('/', (req, res) => {
-    res.json({msg: 'blog index route'})
+    db.Blog.find({})
+    .then(foundCollection => {
+        res.json({foundCollection})
+    })
 })
 
 //make a new blog post
 router.post('/', (req, res) => {
-    res.json({msg: 'post new blog route'})
+    console.log(req.body.title)
+    db.Blog.create(req.body)
+    .then(createdBlog => {
+        res.status(200).json(createdBlog)
+    }).catch(err => {
+        if (err.name === 'ValidationError') {
+            res.status(406).json({message: 'Validation Error: ', err})
+        } else {
+            res.status(503).json({message: 'Database or Server Error'})
+        }
+    })
 })
 
 //show one blog post 
