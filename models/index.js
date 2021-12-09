@@ -11,3 +11,5 @@ db.once('open', () => {
 db.on('error', (err) => {
     console.error('Database Error!', err)
 })
+
+module.exports.Cuisine = require('./cuisine')
