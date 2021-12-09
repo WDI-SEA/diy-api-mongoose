@@ -41,4 +41,16 @@ router.put('/:id', (req, res) => {
         res.status(503).json({ message: 'Database or server error!' })
     })
 })
+
+// Delete art by id
+router.delete('/:id', (req, res)=>{
+    db.Art.findByIdAndDelete(req.params.id)
+    .then(()=>{
+        res.status(204).json({message: 'Deleted collection by id'})
+      })
+      .catch(err=>{
+        console.log(err)
+        res.status(503).json({message: 'Database or server error!'})
+      })
+})
 module.exports = router
