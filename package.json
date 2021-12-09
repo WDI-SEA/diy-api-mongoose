@@ -1,0 +1,25 @@
+{
+  "name": "diy-api-mongoose",
+  "version": "1.0.0",
+  "description": "## **Deliverable**:",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ramon-Carrillo/diy-api-mongoose.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ramon-Carrillo/diy-api-mongoose/issues"
+  },
+  "homepage": "https://github.com/Ramon-Carrillo/diy-api-mongoose#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.1.0"
+  }
+}
