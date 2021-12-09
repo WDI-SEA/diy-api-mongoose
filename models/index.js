@@ -10,3 +10,5 @@ db.once('open', () => {
 db.on('error', err => {
     console.log('Error connecting to db:', err)
 })
+
+module.exports.Opera = require('./opera')
