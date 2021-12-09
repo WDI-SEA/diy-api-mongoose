@@ -5,7 +5,7 @@ const db = require('../models')
 router.get('/', (req, res) => {
     db.Cuisine.find()
     .then(foundCuisines => {
-        res.status(200).json(foundCuisine)
+        res.status(200).json(foundCuisines)
     })
     .catch(err => {
         console.error
@@ -55,5 +55,11 @@ router.get('/:id', (req, res) => {
 })
 
 // delete (DELETE) a dish
+router.delete('/:id', (req, res) => {
+    db.Cuisine.deleteOne({_id: req.params.id})
+    .catch(err => {
+        console.error
+    })
+})
 
 module.exports = router
