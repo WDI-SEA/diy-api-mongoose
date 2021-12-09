@@ -55,4 +55,16 @@ router.get('/:id', (req, res) => {
         })
 })
 
+// DELETE a blog
+router.delete('/:id', (req, res) => {
+    db.Blog.deleteOne({ _id: req.params.id })
+        .then(foundBlogs => {
+            res.status(200).json(foundBlogs)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(503).json({ message: 'Database asleep?' })
+        })
+})
+
 module.exports = router
