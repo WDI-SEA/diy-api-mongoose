@@ -4,7 +4,7 @@ const db = require('../models')
 // index (GET) of cuisine
 router.get('/', (req, res) => {
     db.Cuisine.find()
-    .then(foundCuisine => {
+    .then(foundCuisines => {
         res.status(200).json(foundCuisine)
     })
     .catch(err => {
@@ -44,6 +44,15 @@ router.put('/:id', (req, res) => {
 })
 
 // show (GET) details of a dish
+router.get('/:id', (req, res) => {
+    db.Cuisine.find({_id: req.params.id})
+    .then(foundCuisine => {
+        res.json(foundCuisine)
+    })
+    .catch(err => {
+        console.error
+    })
+})
 
 // delete (DELETE) a dish
 
