@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const db = require('./models')
 
+app.use(express.urlencoded({extended: false}))
 app.use('/cuisine', require('./controllers/cuisine'))
 
 app.get('/', (req,res) => {
