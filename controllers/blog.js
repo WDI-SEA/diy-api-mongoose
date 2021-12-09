@@ -28,3 +28,20 @@ router.post('/', (req, res) => {
             }
         })
 })
+
+// EDIT a single blog
+router.put('/:id', (req, res) => {
+    db.Blog.findOneAndUpdate({ _id: req.params.id },
+        req.body,
+        { new: true })
+        .then(updatedBlog => {
+            res.json(updatedBlog)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(503).json({ message: 'Server Error' })
+        })
+})
+
+
+module.exports = router
