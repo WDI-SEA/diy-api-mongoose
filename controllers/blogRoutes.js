@@ -50,4 +50,16 @@ router.put('/:id', (req,res) => {
         res.status(503).json({message: 'Server Error'})
     })})
 
+// DELETE 
+router.delete('/:id', (req, res) => {
+	db.Blog.findById(req.params.id)
+    .then((blog) => {
+        // delete the blog
+        blog.deleteOne()
+    })
+    .catch(err => {
+        console.log('Error while creating', err)
+    })
+})
+
 module.exports = router
