@@ -9,21 +9,23 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
         console.error
+        res.status(503).json({message: 'Db snoozing away?'})
     })
 })
 
 // add (POST) a new dish
 router.post('/', (req, res) => {
-    db.Cuisine.create({
-        name: 'Thit Kho',
-        dishType: 'rice',
-        description: 'braised pork belly, typically hard boiled eggs and served with rice'
-    })
+    db.Cuisine.create(req.body)
     .then(createdCuisine => {
         res.status(200).json(createdCuisine)
     })
     .catch(err => {
-        console.error
+        console.log('Error while creating', err)
+        if(err.name === 'ValidationError') {
+            res.status(406).json({message: 'Validation Error'})
+        } else {
+            res.status(503).json({message: 'Database or server error!'})
+        }
     })
 })
 
