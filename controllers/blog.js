@@ -26,17 +26,34 @@ router.post('/', (req, res) => {
 
 //show one blog post 
 router.get('/:id', (req, res) => {
-    res.json({msg: `showing post ${req.params.id}`})
+    db.Blog.findById(req.params.id)
+    .then(foundPost => {
+        res.json({foundPost})
+    }).catch(err => {
+        res.json({msg: `Error: ${err}`})
+    })
 })
 
 //edit blog post 
 router.put('/:id', (req, res) => {
-    res.json({msg: `route to edit post ${req.params.id}`})
+    db.Blog.findOneAndUpdate({id: req.params.id}, req.body, {new: true})
+    .then(updatedBlog => {
+        res.json(updatedBlog)
+    }).catch(err => {
+        console.log('error')
+        res.status(503).json({msg: 'Database Error: '})
+    })
 })
 
 //delete blog post
 router.delete('/:id', (req, res) => {
-    res.json({msg: `route for deleting post ${req.params.id} `})
+    db.Blog.findOneAndDelete({id: req.params.id})
+    .then(deletResponse => {
+        res.json({deletedDocument: deletResponse})
+    }).catch(err => {
+        console.log(err)
+        res.status(503).json({msg: 'Database Error'})
+    })
 })
 
 module.exports = router
