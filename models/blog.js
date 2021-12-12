@@ -1,8 +1,24 @@
-const { contentType } = require('express/lib/response')
 const mongoose = require('mongoose')
 
 let blogSchema = new mongoose.Schema({
-    name: String,
-    title: Number,
-    content: String
+    
+    title: {
+        type:String,
+        required: true,
+
+    },
+    author:{
+        type:String,
+        required:true
+    },
+    content:{
+        type:String
+    },
+    genre:{
+        type:String,
+        required:true
+    }
+
 })
+
+module.exports =mongoose.model('Blog', blogSchema )

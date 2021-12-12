@@ -3,6 +3,7 @@ const app = express()
 const db = require('./models')
 
 
+app.use('/blogs', require('./controllers/blog'))
 
 app.get('/', (req,res) => {
     res.json({message: 'Hello Wally'})

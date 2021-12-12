@@ -12,4 +12,6 @@ db.on('error', (err) => {
     console.error(`Database error:\n${err}`)
 })
 
+module.exports.Bounty = require('./bounty')
+
 
