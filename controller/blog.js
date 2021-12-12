@@ -38,15 +38,12 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-	db.Blog.findById(req.params.id)
-    .then((blog) => {
-        // delete the blog
-        blog.deleteOne()
-    })
-	db.Blog.deleteOne({_id: req.params.id})
-    .catch(err => {
-        console.log('Error while creating', err)
-        console.error
+    db.Blog.findOneAndDelete({id: req.params.id})
+    .then(deletedBlog => {
+        res.json({deletedDocument: deletedBlog})
+    }).catch(err => {
+        console.log(err)
+        res.status(503).json({msg: 'Database Error'})
     })
 })
 
