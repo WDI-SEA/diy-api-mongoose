@@ -22,8 +22,20 @@ router.post('/', (req, res) => {
             res.status(503).json({message: 'Database or server error'})
         }    
     })
-    
-    })
+})
+
+router.put('/:id', (req, res) => {
+    db.Blog.findOneAndUpdate({_id: req.params.id},
+        req.body,
+        {new:true})
+        .then(updateBlog => {
+            res.json(updateBlog)
+        })
+        .catch(err=>{
+            console.log(err)
+            res.status(503).json({message: 'Server error'})
+        })
+})
 
 
 
