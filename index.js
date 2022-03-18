@@ -10,6 +10,7 @@ app.use(cors())
 
 //controller middleware
 app.use('/pond', require('./controllers/pond'))
+app.use('/fish', require('./controllers/fish'))
 
 app.get('/',(req,res)=>{
     res.send('homepage, no real data here sry')

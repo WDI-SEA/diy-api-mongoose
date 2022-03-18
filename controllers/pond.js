@@ -22,7 +22,26 @@ router.post('/', async (req,res)=>{
     
     res.json({message: `you've hit the post route for the pond`})
 })
-//GET /pond/:id show one pond
+//POST /pond/:id/fish - add a fish to the pond
+router.post('/:id/fish', async (req,res)=>{
+    console.log(`trying to add a new fish to a pond`)
+    try {
+        const foundPond = await db.Pond.findById(req.params.id)
+        const newFish = await db.Fish.create(req.body)
+        newFish.pond = foundPond
+        foundPond.fish.push(newFish)
+        await newFish.save()
+        await foundPond.save()
+        res.json({message: `successfully added ${newFish} to ${foundPond}`})
+    } catch (error) {
+        console.log(error)
+    }
+    res.json({message: `trying to add a fish to the pond`})
+})
+//GET /pond/:id show one pond 
+/**
+ * TODO - and all fish in it
+ */
 router.get('/:id',async (req,res)=>{
     try {
         const { id } = req.params
