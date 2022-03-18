@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         res.json(showAllBlogs)
     } catch (err) {
         console.log(err)
-        res.status(503).json({message: 'Database or Server Error!'})
+        res.status(503).json({message: `Database or Server Error at ${err}`})
 
     }
 })
@@ -35,13 +35,8 @@ router.get('/:id', async (req, res) => {
 // POST
 router.post('/', async (req, res) => {
     try {
-
         const createBlog = await db.Blog.create(req.body);
         res.status(201).json(createBlog)
-        createBlog.comments.push({
-            comments: _id
-        })
-        await createBlog.save()
     } catch (err) {
         if (err.name === 'ValidationError'){
             res.status(406).json({message: 'Validation Error'})
@@ -52,9 +47,20 @@ router.post('/', async (req, res) => {
 })
 
 
-// POST (CREATE COMMENT)
-router.post('/:id/comment', async (req, res) => {
-
+// POST COMMENTS
+router.post('/:id/comments', async (req, res) => {
+    try {
+        const createComment = await db.Blog.findById(req.params.id)
+        createComment.comments.push(req.body)
+        await createComment.save()
+        res.status(201).json(createComment)
+    } catch (err) {
+        if (err.name === 'ValidationError'){
+            res.status(406).json({message: 'Validation Error'})
+        } else {
+            res.status(503).json({message: 'Database or Server Error trying to post comments!'})
+        }
+    }
 })
 
 // PUT
@@ -84,5 +90,9 @@ router.delete('/:id', async (req, res) => {
         res.status(503).json({message: 'Something is wrong!'})
     }
 })
+
+
+
+
 
 module.exports = router
