@@ -6,8 +6,7 @@ router.put('/:id', async(req,res)=> {
     try {        
         const foundBlog = await db.BlogPost.findOne({
             'comments._id' : req.params.id
-        })
-        console.log(foundBlog)
+        })        
         const foundComment = foundBlog.comments.id(req.params.id)
         foundComment.set(req.body)
         await foundBlog.save()
