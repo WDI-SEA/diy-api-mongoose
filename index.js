@@ -9,7 +9,7 @@ app.use(cors())
 
 // controllers
 app.use('/blog', require('./controllers/blog'))
-// app.use('/comment', require('./controllers/comment.js'))
+app.use('/comment', require('./controllers/comment.js'))
 
 app.listen(8000, ()=> {
     console.log('DIY API Mongoose')
