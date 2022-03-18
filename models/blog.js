@@ -6,9 +6,18 @@ const mongoose = require ('mongoose')
 
 // make model schema
 const blogSchema = new mongoose.Schema({
-    name: String,
-    title: Number,
-    content: String,
+    name: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: Number,
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    },
     // many comments 1:M
     comments: {
         type: mongoose.Schema.Types.ObjectId,

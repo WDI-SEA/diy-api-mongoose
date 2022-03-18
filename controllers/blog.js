@@ -2,6 +2,11 @@ const router = require('express').Router()
 const res = require('express/lib/response')
 const db = require('../models')
 
+// GET all blogs
+// router.get('/', (req, res)=> {
+//     res.json({msg: 'blogs here'})
+// })
+
 // CRUD FOR BLOG
 
 // RES.JSON({MESSAGE: "TEST"}) -- TO TEST HITTING ROUTES
@@ -60,7 +65,7 @@ router.put('/:id', async (req, res) => { //async/await
     // find one blog to update
     try {
         // get the id from req params
-        const id = req.params.id
+        const {id} = req.params.id
         // find
         const options = {
             new:true
@@ -85,9 +90,17 @@ router.put('/:id', async (req, res) => { //async/await
 
 
 // | DELETE | delete | /blog/:id | delete one blog post |
-
-// invoke crud
-
+router.delete('/:id', (req, res)=> {
+    // find blog with req.params and delete
+    db.Blog.findByIdAndDelete(req.params.id)
+    // give a message it is deleted
+    .then(()=> ({message:'blog deleted'}))
+    // if something goes wrong send a status message
+    .catch(error => {
+        console.log(error)
+        res.status(503).json({message: 'went wrong'})
+    })
+})
 
 // module.export
 module.exports = router

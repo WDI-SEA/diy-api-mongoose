@@ -5,7 +5,10 @@ const mongoose = require ('mongoose')
 
 // child embedded schema
 const commentSchema = new mongoose.Schema({
-   content: String, 
+   content: {
+      type: String, 
+      required: true
+   },
    // can belong to 1 blog
    blog: {
     type: mongoose.Schema.Types.ObjectId,
