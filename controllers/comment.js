@@ -26,9 +26,9 @@ router.delete('/:id', async (req, res) => {
   const blog = await  db.Blog.findOne({ 
     "comments._id": req.params.id
   })
-  await blog.comments.id(req.params.id).remove()
+  blog.comments.id(req.params.id).remove()
 
-  blog.save()
+  await blog.save()
 
   res.json(blog)
  } catch (err) {
