@@ -94,8 +94,9 @@ router.delete('/:id', (req, res)=> {
     // find blog with req.params and delete
     db.Blog.findByIdAndDelete(req.params.id)
     // give a message it is deleted
-    .then(()=> ({message:'blog deleted'}))
+    .then(()=> ({message:'blog deleted'})
     // if something goes wrong send a status message
+    )
     .catch(error => {
         console.log(error)
         res.status(503).json({message: 'went wrong'})
