@@ -38,8 +38,21 @@ router.get('/:id', async (req,res)=>{
     }
 })
 
-// update one blog post. i will be adding a comment
+// update one blog post. 
 router.put('/:id', async(req, res)=>{
+    try{
+        const updateBlogPost = await db.BlogPost.findOneAndUpdate({
+            _id: req.params.id
+        }, req.body, {new: true})               
+        res.json(updateBlogPost)
+    }catch(err) {
+        console.log(err)
+        res.status(503).json({message:`An error occured. Details : ${err}`})
+    }
+})
+
+// add comment to blog post
+router.put('/:id/comment', async(req, res)=>{
     try{
         const newComment = await db.BlogPost.findById(req.params.id)
         newComment.comments.push(req.body)
@@ -50,6 +63,8 @@ router.put('/:id', async(req, res)=>{
         res.status(503).json({message:`An error occured. Details : ${err}`})
     }
 })
+
+
 
 // delete one blog post
 router.delete('/:id', async(req, res)=> {

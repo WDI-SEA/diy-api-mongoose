@@ -8,6 +8,7 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
 app.use('/blog', require('./controllers/blog'))
+app.use('/comment', require('./controllers/comment'))
 
 app.listen(PORT, ()=> {
     console.log(`Server listening at port : ${PORT}`)
