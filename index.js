@@ -5,6 +5,10 @@ const app = express()
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
+app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to the blog API 👋'})
+})
+
 // controller middleware
 app.use('/blog', require('./controllers/blog'))
 app.use('/comment', require ('./controllers/comment'))
