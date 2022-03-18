@@ -24,7 +24,6 @@ router.post('/:id/comment', async (req, res)=> {
         foundBlog.comments.push(req.body)
         await foundBlog.save()
         res.json(foundBlog)
-        
     } catch (err) {
         console.log(err)
         res.status(503).json({ message: 'Db/Server Error' })
@@ -49,8 +48,8 @@ router.get('/:id', async (req, res)=> {
         const foundBlog = await db.Blog.findById(id)
         res.json(foundBlog)
     } catch(err) {
+        if (err.name === "CastError") return res.status(404).json({ message: "Can't find the blog because the id was malformed" })
         res.status(503).json({ message: "database weren't workin" })
-        console.log(error)
     }
 })
 
@@ -58,6 +57,7 @@ router.get('/:id', async (req, res)=> {
 router.put('/:id', async (req, res)=> {
     try {
         const id = req.params.id
+        // could also use findByIdAndUpdate(req.params.id, req.body, { new: true})
         const editedBlog = await db.Blog.findOneAndUpdate({
             _id: id
         },
@@ -76,7 +76,7 @@ router.put('/:id', async (req, res)=> {
 router.delete('/:id', async (req, res)=> {
     try {
         const deleteBlog = await db.Blog.findByIdAndDelete(req.params.id)
-        res.status(204).json({ message: 'the blog was deleted' })
+        res.status(204)
     } catch (err) {
         console.log(err)
         res.status(503).json({ message: "database weren't workin" })

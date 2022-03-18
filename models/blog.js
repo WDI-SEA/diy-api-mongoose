@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 
 // define the embedded child schema
 const commentSchema = new mongoose.Schema({
-    header: String,
-    body: String,
+    content: String,
 })
 
 const blogSchema = new mongoose.Schema({
@@ -15,8 +14,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    name: String,
     comments: [commentSchema]
 })
 
 module.exports = mongoose.model('Blog', blogSchema)
-module.exports = mongoose.model('Comment', commentSchema)
+// module.exports = mongoose.model('Comment', commentSchema)

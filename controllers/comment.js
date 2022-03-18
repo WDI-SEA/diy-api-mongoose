@@ -2,17 +2,15 @@ const db = require('../models')
 const router = require('express').Router()
 
 // PUT...(/:id)
-router.put('/:id', async (req, res)=> {
+router.put('/:id', async (req, res)=> { 
     try {
-        const id = req.params.id
-        const editedComment = await db.Comment.findOneAndUpdate({
-            _id: id
-        },
-        req.body,
-        options = {new: true}
-        )
-        if(!editedComment) return res.status(404).json({ message: 'unable to find comment' })
-        res.json(editedComment)
+        const blog = await db.Blog.findOne({
+            "comments._id": req.params.id
+        })
+        const comment = await blog.comments.id(req.params.id)
+        comment.content = req.body.content
+        await blog.save()
+        res.json(blog)
     } catch (err) {
         console.log(err)
         res.status(503).json({ message: "database weren't workin" })
@@ -22,10 +20,15 @@ router.put('/:id', async (req, res)=> {
 // DELETE...(/:id)
 router.delete('/:id', async (req, res)=> {
     try {
-        const deleteComment = await db.Comment.findByIdAndDelete(req.params.id)
-        res.status(204).json({ message: 'the comment was deleted' })
+        const blog = await db.Blog.findOne({
+            "comments._id": req.params.id
+        })
+        await blog.comments.id(req.params.id).remove()
+        blog.save()
+        res.json(blog)
     } catch (err) {
         console.log(err)
+        res.status(503).json({ msg: 'error' })
     }
 })
 
