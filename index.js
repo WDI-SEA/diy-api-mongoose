@@ -11,7 +11,7 @@ app.use(cors())
 
 // controllers
 app.use('/blog', require('./controllers/blog.js'))
-app.use('/comment', require('./controllers/comment.js'))
+app.use('/comments', require('./controllers/comment.js'))
 
 
 app.listen(8000, () => {
