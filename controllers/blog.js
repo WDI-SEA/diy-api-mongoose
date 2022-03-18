@@ -32,10 +32,7 @@ router.post("/", (req, res ) => {
 
 // GET -- "/blog/:id" show one blog post
 router.get("/:id", (req, res) => {
-    // it the id from the params
-    const { id } = req.params
-
-    db.Post.findById(id)
+    db.Post.findById(req.params.id)
         .then(post => {
             if (!post) return res.status(404).json({ message: "Post Not Found 👀 " })
             res.json(post) 
@@ -48,18 +45,7 @@ router.get("/:id", (req, res) => {
 // PUT -- "/blog/:id" update one blog post 
 router.put("/:id", async (req, res) => {
     try{
-        const id = req.params.id
-        // setting options
-        const options = {
-            new: true
-        }
-
-        const updatedPost = await db.Post.findOneAndUpdate({
-            _id: id
-        }, 
-        req.body,
-        options
-        )
+        const updatedPost = await db.Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
         if(!updatedPost) return res.status(404).json({ message: "Post Not Found 👀"})
         res.json(updatedPost)
 
@@ -76,8 +62,29 @@ router.delete("/:id", (req, res) => {
     })
     .catch(err => {
         console.log(err)
-        res.status(503).json({ message: "Sorrt the Database is on Fire 🔥" })
+        res.status(503).json({ message: "Sorry the Database is on Fire 🔥" })
     })
 })
+
+
+// adding the comment to the post
+router.post("/:id/comment", async (req, res) => {
+    try{
+        // find the blog at :id
+        const post = await db.Post.findById(req.params.id)
+        // push it to the blog comment array
+        post.comment.push(req.body)
+        // save the blog
+        await post.save()
+        // send the block back in the response
+        res.json(post)
+
+    }catch (err) {
+        console.log(err)
+        res.status(503).json({ message: "Sorry the Database is on Fire 🔥" })
+    }
+})
+
+
 
 module.exports = router
