@@ -5,7 +5,7 @@ const router = require('express').Router()
 router.put('/:id', async(req,res)=> {
     try {        
         const foundBlog = await db.BlogPost.findOne({
-            'category._id' : req.params.id
+            'comments._id' : req.params.id
         })
         console.log(foundBlog)
         const foundComment = foundBlog.comments.id(req.params.id)

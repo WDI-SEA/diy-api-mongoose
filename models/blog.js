@@ -10,7 +10,7 @@ const blogSchema = new mongoose.Schema({
     author: String,
     title: String,
     body: String,
-    date: Date,
+    imgurl: String,    
     comments:[commentSchema]
 },{timestamps:true})
 
