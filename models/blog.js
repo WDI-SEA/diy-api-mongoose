@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
   body: String,
-  date: Date,
 });
 
 const blogSchema = new mongoose.Schema({

@@ -1,9 +1,9 @@
-const db = require("../models/blog");
+const db = require("../models");
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
   try {
-    const blogs = await db.find({});
+    const blogs = await db.Blog.find({});
     res.json(blogs);
   } catch (err) {
     console.log(err);
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const id = await db.findById(req.params.id);
+    const id = await db.Blog.findById(req.params.id);
     res.json(id);
   } catch (err) {
     console.log(err);
@@ -23,18 +23,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const newBlog = await db.create(req.body);
+    const newBlog = await db.Blog.create(req.body);
     res.status(201).json(newBlog);
-  } catch (err) {
-    console.log(err);
-    res.status(503).json({ message: "the database is on fire" });
-  }
-});
-
-router.post("/blogs/:id/comment", async (req, res) => {
-  try {
-    const newComment = await db.findOneAndUpdate(blog, comment);
-    res.status(201).json(newComment);
   } catch (err) {
     console.log(err);
     res.status(503).json({ message: "the database is on fire" });
@@ -47,7 +37,7 @@ router.put("/:id", async (req, res) => {
     const options = {
       new: true,
     };
-    const updatedBlog = await db.findOneAndUpdate(
+    const updatedBlog = await db.Blog.findOneAndUpdate(
       {
         _id: id,
       },
@@ -61,29 +51,9 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.put("/comment/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const options = {
-      new: true,
-    };
-    const updatedComment = await db.comment.findOneAndUpdate(
-      {
-        _id: id,
-      },
-      req.body,
-      options
-    );
-    res.json(updatedComment);
-  } catch (err) {
-    console.log(err);
-    res.status(503).json({ message: "the server is broken" });
-  }
-});
-
 router.delete("/:id", async (req, res) => {
   try {
-    await db.findByIdAndDelete(req.params.id);
+    await db.Blog.findByIdAndDelete(req.params.id);
     res.status(204).json({ message: "the blog is deleted" });
   } catch (err) {
     console.log(err);
@@ -94,11 +64,26 @@ router.delete("/:id", async (req, res) => {
 router.delete("/comment/:id", async (req, res) => {
   try {
     await db.comment.findByIdAndDelete(req.params.id);
-    res.status(204).json({ message: "the blog is deleted" });
+    res.status(204);
   } catch (err) {
     console.log(err);
     res.status(503).json({ message: "something went wrong" });
   }
 });
 
+router.post("/:id/comment", async (req, res) => {
+  try {
+    // find the blog at :id
+    const blog = await db.Blog.findById(req.params.id);
+    // push it to the blog's comment array
+    blog.comments.push(req.body);
+    // save the blog
+    await blog.save();
+    // send the blog back inthe response
+    res.json(blog);
+  } catch (err) {
+    console.log(err);
+    res.status(503).json({ msg: "error" });
+  }
+});
 module.exports = router;
