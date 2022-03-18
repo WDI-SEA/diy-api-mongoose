@@ -34,6 +34,18 @@ router.post('/', async (req,res)=>{
     }
 })
 
+router.post('/:id/albums', async (req,res)=>{
+    try{  
+        const foundMusician = await db.Musician.findById(req.params.id)
+        foundMusician.albums.push(req.body)
+        await foundMusician.save()
+        res.status(201).json(foundMusician)    
+    }catch(err){
+        console.log(err)
+        res.status(503).json({message: 'did not post to db'})
+    }
+})
+
 
 //PUT
 router.put('/:id', async (req,res)=>{
