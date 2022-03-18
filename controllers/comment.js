@@ -16,12 +16,14 @@ router.put('/:id', async (req, res) => {
             foundComment.content = req.body.content
             await foundBlog.save()
             res.json(foundComment)
+            // res.json(foundBlog) - or show the whole blog. either or
         }
     } catch (err) {
         console.log(err)
         res.status(503).json({ message: 'Database or Server Error'})
     }
 })
+
 
 // DELETE
 router.delete('/:id', async (req, res) => {
@@ -43,5 +45,9 @@ router.delete('/:id', async (req, res) => {
         res.status(503).json({ message: 'Database or Server Error'})
     }
 })
+// DELETE - .then version
+// router.delete('/:id', (req, res) => {
+
+// })
 
 module.exports = router
