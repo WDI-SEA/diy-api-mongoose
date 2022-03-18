@@ -70,4 +70,23 @@ router.delete('/:id', (req, res) => {
     }) 
 })
 
+// POST Route | Post a new comment
+
+router.post('/:id/comments', async (req, res) => {
+  try {
+    const foundBlog = await db.Blog.findById(req.params.id)
+    foundBlog.comments.push(req.body)
+    await foundBlog.save()
+    res.status(201).json(foundBlog)
+  } catch (err) {
+    console.log(err)
+    if (err.name === "ValidationError") {
+      res.status(406).json({ message: "Validation Error!" });
+    } else {
+      res.status(503).json({ message: "DB/Server Error!" });
+    }
+  }
+})
+
+
 module.exports = router;
