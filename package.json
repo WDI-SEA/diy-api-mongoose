@@ -1,0 +1,23 @@
+{
+  "name": "diy-api-mongoose",
+  "version": "1.0.0",
+  "description": "## **Deliverable**:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbrose/diy-api-mongoose.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbrose/diy-api-mongoose/issues"
+  },
+  "homepage": "https://github.com/zbrose/diy-api-mongoose#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.7"
+  }
+}
