@@ -1,3 +1,4 @@
+const express = require('express');
 const db = require('../model');
 const router = require('express').Router();
 
@@ -34,6 +35,8 @@ router.get('/:id', async (req, res) => {
 		res.json(blog);
 	} catch (error) {
 		console.log(error);
+		if (error.name === 'CastError')
+			return res.status(404).json(404).json({ msg: 'I cant find that blog, because the id was malformed' });
 		res.status(503).json({ message: 'blog not found' });
 	}
 });
@@ -66,6 +69,22 @@ router.delete('/:id', async (req, res) => {
 	} catch (error) {
 		console.log(error);
 		res.status(503).json({ message: 'Something went wrong' });
+	}
+});
+
+router.post('/:id/comment', async (req, res) => {
+	try {
+		// find the blog at :id
+		const blog = await db.Blog.findById(req.params.id);
+		// push it to the blog's comment array
+		blog.comments.push(req.body);
+		// save the blog
+		await blog.save();
+		// send the blog back inthe response
+		res.json(blog);
+	} catch (err) {
+		console.log(err);
+		res.status(503).json({ msg: 'error' });
 	}
 });
 

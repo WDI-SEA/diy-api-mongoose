@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+const commentSchema = new mongoose.Schema({
+	content: String
+});
+
 const blogSchema = new mongoose.Schema(
 	{
 		name: {
@@ -12,7 +16,8 @@ const blogSchema = new mongoose.Schema(
 			type: String,
 			required: true
 		},
-		content: String
+		content: String,
+		comments: [ commentSchema ]
 	},
 	{ timestamps: true }
 );
