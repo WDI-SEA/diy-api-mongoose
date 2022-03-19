@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost/mernblog')
+mongoose.connect('mongodb://localhost/mernexpr')
 const db = mongoose.connection
 
 db.once('open', () => {
@@ -14,4 +14,5 @@ db.on('error', err => {
 
 console.log('I thought I would let you know that you are accessing the models directory.')
 
-module.exports.BlogPost = require('./blog')
+// module.exports.BlogPost = require('./blog')
+module.exports.Expr = require('./expression')
