@@ -15,14 +15,9 @@ const kittySchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 50,
   },
-  nickname: String,
-  imgUrl: [picSchema],
   age: Number,
-  breed:String,
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }
+  parent: String,
+  img: [picSchema]
 }, {timestamps:true});
 
 

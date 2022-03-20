@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 
 //mongo connectionstring
-mongoose.connect('mongodb://127.0.0.1/kittiescollection')
+mongoose.connect('mongodb://127.0.0.1/kittycollection')
 
 //shortcut to the db
 const db = mongoose.connection
