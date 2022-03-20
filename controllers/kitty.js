@@ -30,16 +30,16 @@ router.post("/", (req, res) => {
 //GET /kitty:id read SINGLE cat @id
 router.get("/:id", async (req, res) => {
   // get the id from the request parameters
-  const { id } = req.params;
+  const id = req.params.id;
   try {
     const foundKitty = await db.Kitty.findById(id);
-    if (!foundBlog) return res.status(404).json({ msg: "blog not found" });
+    if (!foundKitty) return res.status(404).json({ msg: "cat not found" });
     res.json(foundKitty);
   } catch (err) {
     if (err.name === "CastError")
       return res
         .status(404)
-        .json({ msg: "I cant find that blob, because the id was malformed" });
+        .json({ msg: "I cant find that cat, because the id was malformed" });
   }
 });
 
@@ -82,26 +82,27 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const foundKitty = await db.Kitty.findByIdAndDeleted(req.params.id);
+    const foundKitty = await db.Kitty.findByIdAndDelete(req.params.id);
     res.json({ message: "kitty deleted :(." });
     if (!foundKitty) {
       res.json({ message: "Cannot find cat." });
-    } 
+    }
   } catch (err) {
     console.log(err);
     res.status(503).json({ message: `An error occured. Details : ${err}` });
   }
 });
 
-router.post("/:id/kitpic", async (req,res) => {
-  try{
-    const foundKitty = await db.Kitty.findById(req.params.id)
-    foundKitty.pics.push(req.body)
-    await foundKitty.save()
-    res.json(foundKitty)
-  }catch(err) {
-    console.log("@POSTKITPIC", err)
-    res.status(503).json({msg: 'error'})
+router.post("/:id/kitpic", async (req, res) => {
+  try {
+    const foundKitty = await db.Kitty.findById(req.params.id);
+    console.log("foundkitty", foundKitty);
+    foundKitty.imgs.push(req.body);
+    await foundKitty.save();
+    res.json(foundKitty);
+  } catch (err) {
+    console.log("@POSTKITPIC", err);
+    res.status(503).json({ msg: "error" });
   }
 });
 
