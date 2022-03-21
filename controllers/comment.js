@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-// PUT /comment -- updates a comment @ :id
 router.put("/:id", async (req, res) => {
   try {
     const blog = await db.Blog.findOne({
@@ -30,6 +29,22 @@ router.delete("/:id", async (req, res) => {
 
     await blog.save();
 
+    res.json(blog);
+  } catch (err) {
+    console.log(err);
+    res.status(503).json({ msg: "error" });
+  }
+});
+
+router.post("/:id/comment", async (req, res) => {
+  try {
+    // find the blog at :id
+    const blog = await db.Blog.findById(req.params.id);
+    // push it to the blog's comment array
+    blog.comments.push(req.body);
+    // save the blog
+    await blog.save();
+    // send the blog back inthe response
     res.json(blog);
   } catch (err) {
     console.log(err);
