@@ -48,7 +48,7 @@ let requestLogger = (req, res, next) => {
   onFinished(res, () => {
     const durationInMilliseconds = getActualRequestDurationInMilliseconds(start)
     let method = req.method
-    let url = req.url
+    let url = req.originalUrl
     let status = res.statusCode
 
     const coloredDate = chalk.blue(formatted_date)
