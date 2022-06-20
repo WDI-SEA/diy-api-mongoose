@@ -16,6 +16,7 @@ app.get('/',(req, res) => {
 })
 
 app.use('/cars', require('./controllers/car'))
+app.use('/history', require('./controllers/history'))
 
 // listening on a port
 app.listen(PORT, () => console.log('Listening on port', PORT))

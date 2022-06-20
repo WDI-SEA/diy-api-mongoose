@@ -78,4 +78,18 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+// POST /cars/:id/history -- create history of a car
+router.post('/:id/history', async (req, res) => {
+    try{
+        const newHistory = await db.History.create(req.body)
+        const id = req.params.id
+        const foundCar = await db.Car.findById(id)
+        foundCar.history.push(newHistory)
+        foundCar.save()
+        res.status(201).json(newHistory)
+    }catch(err){
+        res.status(500).json({ msg: 'server error'})
+    }
+})
+
 module.exports = router

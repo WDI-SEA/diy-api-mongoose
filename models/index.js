@@ -17,5 +17,6 @@ db.on('error', err => {
 })
 
 module.exports = {
-    Car: require('./car')
+    Car: require('./car'),
+    History: require('./history')
 }
