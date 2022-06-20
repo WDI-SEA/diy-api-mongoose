@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 app.use(require("./helpers/requestLogger"))
 
 // ROUTES
+app.use("/members", require("./controllers/member"))
 app.use("/", (req, res) => {
   res.json("Welcome to the Library")
 })
