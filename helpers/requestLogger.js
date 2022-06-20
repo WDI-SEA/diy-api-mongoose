@@ -61,6 +61,13 @@ let requestLogger = (req, res, next) => {
 
     let log = `[${coloredDate}] ${coloredMethod} ${url} ${coloredStatus} ${coloredDuration}`
     console.info(log)
+
+    if (Object.keys(req.query).length > 0)
+      console.info(chalk.blue(`Query: ${JSON.stringify(req.query)}`))
+    if (Object.keys(req.params).length > 0)
+      console.info(chalk.blue(`Params: ${JSON.stringify(req.params)}`))
+    if (Object.keys(req.body).length > 0)
+      console.info(chalk.blue(`Body: ${JSON.stringify(req.body)}`))
   })
 
   next()
