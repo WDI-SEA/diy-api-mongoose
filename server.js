@@ -3,7 +3,7 @@ const cors = require("cors")
 const chalk = require("chalk")
 
 const app = express()
-const PORT = 3000
+const PORT = 8000
 
 const isProduction = process.env.NODE_ENV === "production"
 
@@ -23,5 +23,5 @@ app.use("/", (req, res) => {
 app.listen(PORT, handleListen)
 
 function handleListen() {
-  console.log(chalk.magenta(`🎧 Server running on http://localhost/${PORT}`))
+  console.log(chalk.magenta(`🎧 Server running on http://localhost:${PORT}`))
 }
