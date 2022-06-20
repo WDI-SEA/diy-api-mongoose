@@ -17,5 +17,5 @@ db.on('error', error => {
 
 module.exports = {
     blog: require('./blog'),
-    comment: require('/')
+    comment: require('./comment')
 }

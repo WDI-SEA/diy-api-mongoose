@@ -1,23 +1,20 @@
 // require mongoose
 const mongoose = require('mongoose')
 
-// Schema
+// BlogSchema
 const BlogSchema = new mongoose.Schema({
     name: {
         type: String,
-        minlength: 1,
         maxlength: 40,
         required: true
     },
     title: {
         type: String,
-        minlength: 1,
         maxlength: 40,
         required: true
     },
     content: {
         type: String,
-        minlength: 5,
         maxlength: 500
     },
     comments: [{
