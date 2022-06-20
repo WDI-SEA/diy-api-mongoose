@@ -14,6 +14,10 @@ const bookSchema = new mongoose.Schema(
       required: true,
     },
     author: String,
+    isCheckedOut: {
+      type: Boolean,
+      default: false,
+    },
     genres: [genreSchema],
   },
   {

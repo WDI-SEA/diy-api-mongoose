@@ -119,14 +119,98 @@ router.delete("/:id", async (req, res) => {
   }
 })
 
-// STUB: POST /members/:memberId/books/:bookId - Checkout book
-router.post("/:memberId/books/:bookId", (req, res) => {
-  res.json("Checkout a book")
+// POST /members/:memberId/books/:bookId - Checkout book
+router.post("/:memberId/books/:bookId", async (req, res) => {
+  try {
+    const member = await db.Member.findById(req.params.memberId).populate(
+      "books"
+    )
+
+    if (!member) {
+      res.status(404).json({ error: "Member not found" })
+      return
+    }
+
+    const book = await db.Book.findById(req.params.bookId)
+
+    if (!book) {
+      res.status(404).json({ error: "Book not found" })
+      return
+    }
+
+    if (book.isCheckedOut) {
+      res.status(400).json({ error: "Book already checked out" })
+      return
+    }
+
+    book.isCheckedOut = true
+    await book.save()
+    member.books.push(book)
+    await member.save()
+
+    res.json(member)
+  } catch (error) {
+    if (error.name === "CastError") {
+      console.warn(
+        chalk.yellow("Checkout error -- Invalid ID --"),
+        chalk.yellow(error)
+      )
+      res.status(400).json({ error: "Invalid ID", details: error })
+      return
+    }
+
+    console.error(chalk.red("Error checking out book "), chalk.red(error))
+    res.status(500).json({ error: "Internal Server Error" })
+  }
 })
 
-// STUB: DELETE /members/:memberId/books/:bookId - Return book
-router.delete("/:memberId/books/:bookId", (req, res) => {
-  res.json("Return a book")
+// DELETE /members/:memberId/books/:bookId - Return book
+router.delete("/:memberId/books/:bookId", async (req, res) => {
+  try {
+    const member = await db.Member.findById(req.params.memberId).populate(
+      "books"
+    )
+
+    if (!member) {
+      res.status(404).json({ error: "Member not found" })
+      return
+    }
+
+    const memberCheckedOutIds = member.books.map((book) => book.id)
+
+    const book = await db.Book.findById(req.params.bookId)
+
+    if (!book) {
+      res.status(404).json({ error: "Book not found" })
+      return
+    }
+
+    if (!book.isCheckedOut || !memberCheckedOutIds.includes(book.id)) {
+      res.status(400).json({ error: "Book not checked out by this user" })
+      return
+    }
+
+    book.isCheckedOut = false
+    await book.save()
+
+    const bookIdx = memberCheckedOutIds.indexOf(book.id)
+    member.books.splice(bookIdx, 1)
+    await member.save()
+
+    res.json(member)
+  } catch (error) {
+    if (error.name === "CastError") {
+      console.warn(
+        chalk.yellow("Checkout error -- Invalid ID --"),
+        chalk.yellow(error)
+      )
+      res.status(400).json({ error: "Invalid ID", details: error })
+      return
+    }
+
+    console.error(chalk.red("Error returning book "), chalk.red(error))
+    res.status(500).json({ error: "Internal Server Error" })
+  }
 })
 
 module.exports = router
