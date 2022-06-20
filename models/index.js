@@ -17,4 +17,5 @@ db.on("error", (error) =>
 
 module.exports = {
   Member: require("./member"),
+  Book: require("./book"),
 }
