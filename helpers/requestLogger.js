@@ -1,4 +1,5 @@
 const chalk = require("chalk")
+const onFinished = require("on-finished")
 
 const getActualRequestDurationInMilliseconds = (start) => {
   const NS_PER_SEC = 1e9 //  convert to nanoseconds
@@ -7,8 +8,29 @@ const getActualRequestDurationInMilliseconds = (start) => {
   return (diff[0] * NS_PER_SEC + diff[1]) / NS_TO_MS
 }
 
+const statusColorizer = (status) => {
+  if (status >= 500) {
+    return chalk.red(status)
+  }
+
+  if (status >= 400) {
+    return chalk.yellow(status)
+  }
+
+  if (status >= 300) {
+    return chalk.cyan(status)
+  }
+
+  if (status >= 200) {
+    return chalk.green(status)
+  }
+
+  return status
+}
+
+//middleware function
 let requestLogger = (req, res, next) => {
-  //middleware function
+  const start = process.hrtime()
   let current_datetime = new Date()
   let formatted_date =
     current_datetime.getFullYear() +
@@ -22,21 +44,25 @@ let requestLogger = (req, res, next) => {
     current_datetime.getMinutes() +
     ":" +
     current_datetime.getSeconds()
-  let method = req.method
-  let url = req.url
-  let status = res.statusCode
-  const start = process.hrtime()
-  const durationInMilliseconds = getActualRequestDurationInMilliseconds(start)
 
-  const coloredDate = chalk.blue(formatted_date)
-  const coloredMethod = chalk.magenta(method)
-  const coloredStatus = chalk.cyan(status)
-  const coloredDuration = chalk.red(
-    `${durationInMilliseconds.toLocaleString()} ms`
-  )
+  onFinished(res, () => {
+    const durationInMilliseconds = getActualRequestDurationInMilliseconds(start)
+    let method = req.method
+    let url = req.url
+    let status = res.statusCode
 
-  let log = `[${coloredDate}] ${coloredMethod} ${url} ${coloredStatus} ${coloredDuration}`
-  console.log(log)
+    const coloredDate = chalk.blue(formatted_date)
+    const coloredMethod = chalk.magenta(method)
+    const coloredStatus = statusColorizer(status)
+    // const coloredStatus = chalk.cyan(status)
+    const coloredDuration = chalk.red(
+      `${durationInMilliseconds.toLocaleString()} ms`
+    )
+
+    let log = `[${coloredDate}] ${coloredMethod} ${url} ${coloredStatus} ${coloredDuration}`
+    console.info(log)
+  })
+
   next()
 }
 

@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "mongoose": "^6.4.0",
+    "on-finished": "^2.4.1",
     "rowdy-logger": "^1.0.2"
   },
   "devDependencies": {
