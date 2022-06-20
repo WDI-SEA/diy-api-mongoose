@@ -5,5 +5,17 @@
   "main": "server.js",
   "repository": "https://github.com/saulthebear/diy-api-mongoose.git",
   "author": "Stefan Vosloo <saulthebear@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn start:dev",
+    "start:dev": "nodemon .",
+    "start:prod": "NODE_ENV=production node ."
+  },
+  "dependencies": {
+    "chalk": "<5",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
 }
