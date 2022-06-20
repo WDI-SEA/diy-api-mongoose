@@ -1,4 +1,5 @@
 const chalk = require("chalk")
+const db = require("../models")
 
 const router = require("express").Router()
 
@@ -13,8 +14,23 @@ router.get("/:id", (req, res) => {
 })
 
 // POST /members - Create
-router.post("/", (req, res) => {
-  res.json("Create Member")
+router.post("/", async (req, res) => {
+  try {
+    const newMember = await db.Member.create(req.body)
+    res.status(201).json(newMember)
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      console.log(
+        chalk.yellow("Validation Error creating member"),
+        chalk.yellow(error)
+      )
+      res.status(400).json({ error: error.message })
+      return
+    }
+
+    console.log(chalk.red("Error creating member"), chalk.red(error))
+    res.status(500).json({ error: "Internal Server Error" })
+  }
 })
 
 // PUT /members/:id - Update

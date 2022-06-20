@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const chalk = require("chalk")
+require("./models")
 
 const app = express()
 const PORT = 8000
@@ -26,5 +27,7 @@ app.use("/", (req, res) => {
 app.listen(PORT, handleListen)
 
 function handleListen() {
-  console.log(chalk.magenta(`🎧 Server running on http://localhost:${PORT}`))
+  console.log(
+    chalk.bgGreen.bold(` 🤖 Server listening on http://localhost:${PORT} `)
+  )
 }
