@@ -1,0 +1,9 @@
+{
+  "name": "library-api",
+  "version": "0.0.1",
+  "description": "DIY API - MERN App - GA W8D5 Homework",
+  "main": "server.js",
+  "repository": "https://github.com/saulthebear/diy-api-mongoose.git",
+  "author": "Stefan Vosloo <saulthebear@users.noreply.github.com>",
+  "license": "MIT"
+}
