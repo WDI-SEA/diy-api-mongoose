@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { Superhero } = require('../models')
 const db = require('../models')
 
 router.get('/', async (req,res) => {
@@ -18,6 +19,7 @@ router.post('/', async (req,res) => {
     try {
         const createHero = await db.Superhero.create(req.body)
         
+        
         // if success send to client
         res.status(201).json(createHero)
     } catch (err) {
@@ -27,6 +29,20 @@ router.post('/', async (req,res) => {
         } else {
             res.status(500).json({msg: 'server error'})
         }
+    }
+})
+
+router.post('/', async(req,res) => {
+    try {
+        const Hero = await db.Superhero.findById(req.params.id)
+        const villainOrNot = await db.SuperheroType.create(req.body)
+        Superhero.type.push(villainOrNot)
+        await Hero.save()
+
+        villainOrNot.Hero = Superhero
+        await Hero.save()
+    } catch(err) {
+        console.warn(err)
     }
 })
 router.get("/:id", async (req,res)=>{

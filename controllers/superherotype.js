@@ -3,18 +3,6 @@ const router = require('express').Router()
 
 
 
-router.get('/', async (req,res) => {
-    try {
-        const heroType = await db.Superhero.create({
-            villain: false,
-        
-        })
-        res.json(heroType)
-    } catch(err) {
-        console.warn(err)
-    }
-})
-
 router.put('/:id', async (req,res) => {
     try {
         const updateHeroType = await db.Superhero.findByIdAndUpdate(req.params.id).populate('type')
