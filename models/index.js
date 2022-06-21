@@ -21,4 +21,5 @@ db.on('error', err => {
 // export models
 module.exports = {
     Blog: require('./blog'),
+    Comment: require('./comment'),
 }
