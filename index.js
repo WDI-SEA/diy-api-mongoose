@@ -7,7 +7,7 @@ require('./models')
 
 // app config/middlewares
 const app = express()
-const PORT = 8000
+const PORT = 8500
 
 app.use(express.json())
 app.use(cors())

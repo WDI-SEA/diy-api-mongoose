@@ -68,8 +68,8 @@ router.post('/:id/comment', async (req, res) => {
         // create new comment from req.body
         // console.log(req.body)
         const newComment = await db.comment.create(req.body)
-        newComment.blog = blog
-        // console.log(newComment)
+        newComment.blog = blog.id
+        console.log(newComment)
         // add the blog to the comment
         // push it into specific blog's array of comments (not async)
         // console.log(blog.comments)
@@ -78,8 +78,8 @@ router.post('/:id/comment', async (req, res) => {
         await blog.save()
         await newComment.save()
         // send back blog with comment added
-        res.json(blog)
-        console.log('yu have added a comment to the blog')
+        res.status(201).json({newComment})
+        console.log('you have added a comment to the blog')
     } catch (error) {
         console.warn('🔥🔥🔥🔥🔥🔥 OH NO!', error)
         if(error.name === "ValidationError"){
