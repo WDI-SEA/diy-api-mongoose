@@ -20,7 +20,7 @@ app.get('/', (req,res)=>{
     res.json({ msg: 'welcome to cars api'})
 })
 
-app.use('/cars', require('./controllers/cars'))
+app.use('/cars', require('./controllers/car'))
 
 //listeen on a port
 app.listen(PORT, ()=> console.log(`listeinng on port ${PORT}`))

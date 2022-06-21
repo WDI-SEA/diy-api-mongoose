@@ -1,6 +1,6 @@
 // connect to mongodb
 const mongoose = require('mongoose')
-const uri = 'mongodb://127.0.0.1/bountys'
+const uri = 'mongodb://127.0.0.1/cars'
 mongoose.connect(uri)
 
 const db = mongoose.connection
