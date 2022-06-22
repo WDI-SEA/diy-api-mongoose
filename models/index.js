@@ -2,6 +2,7 @@
 const mongoose = require('mongoose')
 //tell mongoose to connect to the URi
 const uri = 'mongodb://127.0.0.1/diy-api-mongoose'
+mongoose.connect(uri)
 const db = mongoose.connection
 
 db.once('open', () => {
@@ -11,4 +12,6 @@ db.on('error', err => {
     console.warn('Wrong aprroach', err)
 })
 //export all of our models from index.js -this file-
-module.exports.Blog = require('./blog')
+module.exports = {
+    Blog: require('./blog')
+}

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('..models/')
+const db = require('../models')
 
 
 router.put('/:id', async (req,res) => {

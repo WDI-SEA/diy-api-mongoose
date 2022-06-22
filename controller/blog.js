@@ -15,9 +15,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-
-
-
 //GET /blog/:id -- details about specific blog
 router.get('/:id', async (req, res) => {
     try {
@@ -36,10 +33,14 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
+
         //post the id of a specific blog from the url params 
-        const newBlog = db.Blog.findById(req.params.id)
-        //send blog back to the client 
+        console.log(req.body);
+        const newBlog = await db.Blog.create(req.body)
+        // send blog back to the client 
+
         res.status(201).json(newBlog)
+        // res.send("isthio >>>>")
     } catch (err) {
         console.log(err);
         if (err.name === "ValidationError") {
