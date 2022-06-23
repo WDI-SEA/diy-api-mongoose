@@ -6,7 +6,11 @@ router.put('/:id', async (req, res) => {
     const id = req.params.id
     const options = { new: true }
 
-    const updatedComment = db.Comment.findByIdAndUpdate(id, req.body, options)
+    const updatedComment = await db.Comment.findByIdAndUpdate(
+      id,
+      req.body,
+      options
+    )
 
     res.json(updatedComment)
   } catch (err) {
@@ -18,9 +22,9 @@ router.delete('/:id', async (req, res) => {
   try {
     const id = req.params.id
 
-    const deletedComment = db.Comment.findByIdAndDelete(id)
+    await db.Comment.findByIdAndDelete(id)
 
-    res.json(deletedComment)
+    res.sendStatus(204)
   } catch (err) {
     console.warn(err)
   }

@@ -19,7 +19,7 @@ const db = require('./models')
 const commentCrud = async () => {
   try {
     const newComment = await db.Comment.create({
-      content: 'You got it BOSS!!!!',
+      content: 'The benefits suck working for you!!!!!',
     })
 
     const blog = await db.Blog.findById('62ad2e69da91d2ea394c6c4d')

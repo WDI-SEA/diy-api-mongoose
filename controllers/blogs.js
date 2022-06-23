@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id
 
-    const foundBlog = await db.Blog.findById(id)
+    const foundBlog = await db.Blog.findById(id).populate({ path: 'comments' })
 
     res.json(foundBlog)
   } catch (err) {
@@ -62,6 +62,16 @@ router.delete('/:id', async (req, res) => {
 
 router.post('/:id/comment', async (req, res) => {
   try {
+    const id = req.params.id
+    const blog = await db.Blog.findById(id)
+    const newComment = await db.Comment.create(req.body)
+    newComment.blogger = blog
+    blog.comments.push(newComment)
+
+    await blog.save()
+    await newComment.save()
+
+    res.json(blog)
   } catch (err) {
     console.warn(err)
   }
