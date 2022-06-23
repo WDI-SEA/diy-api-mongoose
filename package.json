@@ -1,0 +1,25 @@
+{
+  "name": "diy-api-mongoose",
+  "version": "1.0.0",
+  "description": "For our first MERN app mini project you will be building a personal blog (longterm feel free to use this for outcomes!). First, it's time to make your own API!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seiplet93/diy-api-mongoose.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seiplet93/diy-api-mongoose/issues"
+  },
+  "homepage": "https://github.com/seiplet93/diy-api-mongoose#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "react": "^18.2.0",
+    "react-router-dom": "^6.3.0"
+  }
+}
