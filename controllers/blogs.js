@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { comment } = require('../models')
 const db = require('../models')
 
-// GET /blog --list all blog posts
+// GET /blogs --list all blog posts
 router.get('/', async (req, res) => {
     try {
         // find all blogs
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-// POST /blog --add a new blog post
+// POST /blogs --add a new blog post
 router.post('/', async (req, res) => {
     try {
         // create a new blog post
@@ -30,12 +30,13 @@ router.post('/', async (req, res) => {
         console.warn('🔥🔥🔥🔥🔥🔥 OH NO!', error)
         if(error.name === "ValidationError"){
             res.status(400).json({msg: error.message})
+        }else{
+            res.status(500).json({msg: 'server error'})
         }
-        res.status(500).json({msg: 'server error'})
     }
 })
 
-// GET /blog/:id --show one blog post
+// GET /blogs/:id --show one blog post
 router.get('/:id', async (req, res) => {
     try {
         // get id of specific blog from url params
@@ -53,18 +54,19 @@ router.get('/:id', async (req, res) => {
         console.warn('🔥🔥🔥🔥🔥🔥 OH NO!', error)
         if(error.name === "ValidationError"){
             res.status(400).json({msg: error.message})
+        }else{
+            res.status(500).json({msg: 'server error'})
         }
-        res.status(500).json({msg: 'server error'})
     }
 })
 
-// POST /blog/:id/comment -- add comment to blogpost
+// POST /blogs/:id/comment -- add comment to blogpost
 router.post('/:id/comment', async (req, res) => {
     try {
         // get id of specific blog from url params
         const id = req.params.id
         // find specific blog using that id
-        const blog = await db.blog.findById(id)
+        const blog = await db.blog.findById(id).populate({path: "comments"})
         // create new comment from req.body
         // console.log(req.body)
         const newComment = await db.comment.create(req.body)
@@ -84,12 +86,13 @@ router.post('/:id/comment', async (req, res) => {
         console.warn('🔥🔥🔥🔥🔥🔥 OH NO!', error)
         if(error.name === "ValidationError"){
             res.status(400).json({msg: error.message})
+        }else{
+            res.status(500).json({msg: 'server error'})
         }
-        res.status(500).json({msg: 'server error'})
     }
 })
 
-// PUT /blog/:id --update one blog post
+// PUT /blogs/:id --update one blog post
 router.put('/:id', async (req, res) => {
     try {
         // get id of specific blog from url params
@@ -108,7 +111,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-// DELETE /blog/:id -- delete one blog post
+// DELETE /blogs/:id -- delete one blog post
 router.delete('/:id', async (req, res) => {
     try {
         // get id of specific blog from url params

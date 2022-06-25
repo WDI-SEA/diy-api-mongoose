@@ -7,7 +7,7 @@ require('./models')
 
 // app config/middlewares
 const app = express()
-const PORT = 8500
+const PORT = 8000
 
 app.use(express.json())
 app.use(cors())
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     res.json({msg: "Welcome to the Blog"})
 })
 
-app.use('/blog', require('./controllers/blog'))
+app.use('/blogs', require('./controllers/blogs'))
 app.use('/comment', require('./controllers/comment'))
 
 // listening on PORT
