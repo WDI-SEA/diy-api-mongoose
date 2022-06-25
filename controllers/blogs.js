@@ -63,9 +63,9 @@ router.delete('/:id', async (req, res) => {
 router.post('/:id/comment', async (req, res) => {
   try {
     const id = req.params.id
-    const blog = await db.Blog.findById(id)
+    const blog = await db.Blog.findById(id).populate({ path: 'comments' })
     const newComment = await db.Comment.create(req.body)
-    newComment.blogger = blog
+    newComment.blogger = blog.id
     blog.comments.push(newComment)
 
     await blog.save()

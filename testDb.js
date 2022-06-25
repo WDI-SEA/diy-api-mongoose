@@ -22,7 +22,7 @@ const commentCrud = async () => {
       content: 'The benefits suck working for you!!!!!',
     })
 
-    const blog = await db.Blog.findById('62ad2e69da91d2ea394c6c4d')
+    const blog = await db.Blog.findById('62b513c7fe1f1c7c97c63a8a')
 
     blog.comments.push(newComment)
     newComment.blogger = blog
