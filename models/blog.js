@@ -10,7 +10,7 @@ const blogSchema = new mongoose.Schema({
   content: String,
   name: String,
   comments: [commentSchema]
-})
+},{timestamps:true})
 
 // make model and export it 
 module.exports = mongoose.model('Blog', blogSchema)
