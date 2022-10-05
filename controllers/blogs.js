@@ -52,6 +52,14 @@ router.put('/:id', async (req, res) => {
 })
 
 // DELETE /blogs/:id
-
+router.delete('/:id', async (req, res) => {
+    try {
+        await db.Blog.findByIdAndDelete(req.params.id)
+        res.sendStatus(204)
+    } catch (error) {
+        console.warn(error)
+        res.status(500).json({ message: "Server error" })
+    }
+})
 
 module.exports = router
