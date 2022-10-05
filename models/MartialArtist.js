@@ -20,4 +20,4 @@ const MartialArtistSchema = new mongoose.Schema({
 // turn the schema into a mongoose model
 // export our mongoose model
 // mongoose.model('strong of the model name', schema to turn into a model)
-module.exports = mongoose.model('MixedMartialArtist', MartialArtistSchema)
+module.exports = mongoose.model('MartialArtist', MartialArtistSchema)
