@@ -1,7 +1,7 @@
 // require the mongoose package
 const mongoose = require('mongoose')
 
-// tell mongoose what our database uri, and connect to it
+// tell mongoose what our database uri is, and connect to it
 const uri = 'mongodb://127.0.0.1/bloggin'
 mongoose.connect(uri)
 

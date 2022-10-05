@@ -1,9 +1,15 @@
 const mongoose = require('mongoose')
 
 const blogSchema = new mongoose.schema({
-    name: String,
-    title: String,
-    content: Text
+    name:{
+        type: String,
+    },
+    title: {
+        type: String,
+    },
+    content: {
+    type: String
+    }
 }, {
     timestamps: true
 })
