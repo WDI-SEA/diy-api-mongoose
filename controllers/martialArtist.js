@@ -29,4 +29,15 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+// POST /martialartist -- create a new martial artist in the db
+router.post('/', async (req, res) => {
+    try {
+        const newMartialArtist = await db.MartialArtist.create(req.body)
+        res.status(201).json(newMartialArtist)
+    } catch(err) {
+        console.warn(err)
+        res.status(500).json({ message: 'internal server error' }) 
+    }
+})
+
 module.exports = router
