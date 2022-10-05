@@ -16,7 +16,14 @@ const db = require('../models')
 router.get('/:id', async (req,res)=> {
     try{
         const pokemonCard = await db.PokemonCard.findById(req.params.id)
-        res.json(pokemonCard)
+        const commentIds = pokemonCard.comments.map(comment=> {
+            return comment._id
+        })
+        const comments = await db.Comment.find({_id: {$in : commentIds}})
+        res.json({
+            pokemonCard: pokemonCard,
+            comments: comments
+        })
     }catch(err){
         console.log(err)
         res.status(500).json({ message: 'Internal server error'})
@@ -46,7 +53,8 @@ router.post('/:id/comment', async (req,res)=> {
 
         newComment.pokemoncards.push(foundPokemonCard)
         
-        foundPokemonCard.comments = newComment
+        foundPokemonCard.comments.push(newComment)
+
         await newComment.save()
         await foundPokemonCard.save()
         res.status(201).json(foundPokemonCard)

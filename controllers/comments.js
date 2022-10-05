@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 
-// PUT /comment
+// PUT /comments
 router.put('/:id', async (req,res)=> {
     try{
         const updateComment = await db.Comment.findById(req.params.id)
@@ -16,7 +16,7 @@ router.put('/:id', async (req,res)=> {
         }
 })
 
-// DELETE /comment/:id
+// DELETE /comments/:id
 router.delete('/:id', async (req,res)=> {
     try{
         await db.Comment.findByIdAndDelete(req.params.id)
