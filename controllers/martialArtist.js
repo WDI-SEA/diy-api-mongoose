@@ -15,4 +15,18 @@ router.get('/', async (req, res) => {
     }
 })
 
+// GET /martialartist/:id -- return a single martial artist
+router.get('/:id', async (req, res) => {
+    try {
+        // get specific id from the req.params.id
+        // look up that id in the database
+        const martialArtist = await db.MartialArtist.findById(req.params.id)
+        // send the found martial artist back as json
+        res.json(martialArtist)
+    } catch(err) {
+        console.warn(err)
+        res.status(500).json({ message: 'internal server error' }) 
+    }
+})
+
 module.exports = router
