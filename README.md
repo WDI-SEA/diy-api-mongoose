@@ -19,7 +19,7 @@ How we make it work:
 
 ## **Requirements**: 
 
-1. The model you choose to use should have at least three fields, in addation to the default `_id` field. 
+1. The model you choose to use should have at least three fields, in addition to the default `_id` field. 
 
 *Example:*
 
