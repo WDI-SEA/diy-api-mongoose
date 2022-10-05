@@ -25,7 +25,6 @@ router.get("/:teamId", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         // upsert - prevent duplicates
-        console.log(req.body.name)
         const newTeam = await db.Team.findOneAndUpdate(
             {name: req.body.name},
             req.body,
@@ -45,7 +44,8 @@ router.put("/:teamId", async (req, res) => {
             req.body,
             {new: true}
         );
-        res.status(201).json(team);
+        // no upsert, therefore status code 200
+        res.json(team);
     }
     catch (error) {
         console.log(error);
