@@ -7,10 +7,10 @@ const CategorySchema = new mongoose.Schema({
     budget: {
         type: Number
     },
-    expenses: {
+    expenses: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Expense'
-    }
+    }]
 })
 
 module.exports = mongoose.model('Category', CategorySchema)
