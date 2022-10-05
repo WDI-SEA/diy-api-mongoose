@@ -1,28 +1,18 @@
-// required packages
-const express = require('express')
-const cors = require('cors')
-
-// app configuration
+const express = require("express")
+const mongoose = require("mongoose")
 const app = express()
+require("./models")
+
 const PORT = 8000
 
-// connect to database
-require('./models')
-
-// middlewares
-// allow cross origin resource sharing
-app.use(cors())
-// enable json request body parsing
 app.use(express.json())
 
-// routes/controllers
-app.get('/', (req, res) => {
-    res.json({ message: 'blog dyi api' })
+app.use("/projects", require("./controllers/projects"))
+
+app.get("/", (req, res) => {
+    res.json({message: "API WORKING"})
 })
 
-
-
-// listen on a port
 app.listen(PORT, () => {
-    console.log(`listening on port ${PORT} 🌽`)
+    console.log(`Broadcasting on port ${PORT}`)
 })
