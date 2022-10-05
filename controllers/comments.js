@@ -9,7 +9,7 @@ router.put('/:id', async (req,res)=> {
         updateComment.header = req.body.header
         updateComment.content = req.body.content
         res.json(updateComment)
-
+        await updateComment.save()
     }catch(err){
             console.log(err)
             res.status(500).json({ message: 'Internal server error' })
