@@ -6,7 +6,7 @@ const cors = require('cors')
 const app = express()
 const PORT = 8000
 // connect to database
-require('./models')
+require('./models/Index')
 
 // middlewares
 // allow cross origin resource sharing
@@ -19,7 +19,7 @@ app.get ('/', (req, res) => {
     res.json({ message: 'Welcome to DIY API '})
 })
 
-// app.use('/bounty', require('./controllers/bounty'))
+app.use('/blog', require('./controllers/blog'))
 
 // tell express to listen on a port for incoming http requests
 app.listen(PORT, () => {
