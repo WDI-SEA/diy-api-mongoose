@@ -40,4 +40,19 @@ router.post('/', async (req, res) => {
     }
 })
 
+// PUT /martialartist/:id -- update a single martial artist
+router.put('/:id', async (req, res) => {
+    try {
+        // getting the id from the url route parameters
+        // getting the ddata to update from the request body
+        // ensuring that the query returns the new values with the options object
+        const options = { new: true }
+        const updatedMartialArtist = await db.MartialArtist.findByIdAndUpdate(req.params.id, req.body, options)
+        res.json(updatedMartialArtist)        
+    } catch(err) {
+        console.warn(err)
+        res.status(500).json({ message: 'internal server error' })         
+    }
+})
+
 module.exports = router
