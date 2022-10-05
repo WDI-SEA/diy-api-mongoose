@@ -42,14 +42,14 @@ router.post('/:id/comment', async (req,res)=> {
             header: req.body.header,
             content: req.body.content
         })
-        const foundPokemonCard = await db.PokemonCard.findByIdAndUpdate(req.params.id)
+        const foundPokemonCard = await db.PokemonCard.findById(req.params.id)
 
         newComment.pokemoncards.push(foundPokemonCard)
         
-        foundPokemonCard.comments.push(newComment)
+        foundPokemonCard.comments = newComment
         await newComment.save()
         await foundPokemonCard.save()
-        res.status(201).json(pokemonCard)
+        res.status(201).json(foundPokemonCard)
 
     }catch(err){
         console.log(err)
