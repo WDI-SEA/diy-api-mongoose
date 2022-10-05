@@ -1,9 +1,11 @@
 const express = require('express')
+const db = require('../models')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
     try {
-        res.json({message: 'characters reached.'})
+        const characters = await db.Character.find({})
+        res.status(201).json({characters})
         
     } catch(err) {
         console.warn(err)
@@ -13,7 +15,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        res.json({message: 'character created.'})
+        const newCharacter = await db.Character.create(req.body)
+        res.status(201).json({newCharacter})
         
     } catch(err) {
         console.warn(err)
@@ -23,8 +26,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req,res) => {
     try {
-        res.json({message: `the character ${req.params.id} was reached!`})
-        
+        const editCharacter = await db.Character.findById(req.params.id)
+        res.status(201).json({editCharacter}) 
         
     } catch(err) {
         console.warn(err)
@@ -34,7 +37,8 @@ router.get('/:id', async (req,res) => {
 
 router.put('/:id', async (req,res) => {
     try {
-        res.json({message: `the character ${req.params.id} was reached! to edit.`})
+        const editCharacter = await db.Character.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        res.status(201).json({editCharacter}) 
         
         
     } catch(err) {
@@ -45,7 +49,8 @@ router.put('/:id', async (req,res) => {
 
 router.delete('/:id', async (req,res) => {
     try {
-        res.sendStatus(402)
+        await db.Character.findByIdAndDelete(req.params.id)
+        res.sendStatus(204)
 
     } catch(err) {
         console.warn(err)

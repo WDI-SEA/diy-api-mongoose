@@ -5,4 +5,7 @@ const db = mongoose.connection
 db.once('open', () => console.log(`Open at ${db.host}:${db.port}`))
 db.on('error', err => console.warn('Server failure,', err))
 
-module.exports = {}
+module.exports = {
+    User: require('./User'),
+    Character: require('./Character')
+}
