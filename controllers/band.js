@@ -36,7 +36,9 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         // update one band
-        res.json({message: "test"})
+        const options = { new: true }
+        const updatedBand = await db.Band.findByIdAndUpdate(req.params.id, req.body, options)
+        res.json(updatedBand)
     } catch(err) {
         console.log(err)
     }
@@ -45,7 +47,8 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         // delete one band
-        res.json({message: "test"})
+        await db.Band.findByIdAndDelete(req.params.id)
+        res.sendStatus(204)
     } catch(err) {
         console.log(err)
     }
