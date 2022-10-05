@@ -62,4 +62,17 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+// POST /blogs/:id/comments
+router.post('/:id/comments', async (req, res) => {
+    try {
+        const foundBlog = await db.Blog.findById(req.params.id)
+        foundBlog.comments.push(req.body)
+        await blog.save()
+        res.status(201).json(foundblog)
+    } catch (error) {
+        console.warn(error)
+        res.status(500).json({ message: "Server error" })
+    }
+})
+
 module.exports = router
