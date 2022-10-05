@@ -20,10 +20,26 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+
+
 router.post("/", async (req, res) => {
     try {
         const newBlog = await db.Blog.create(req.body)
         res.json(newBlog)
+    } catch(err) {
+        console.log(err)
+    }
+})
+
+router.post("/:id/comment", async (req, res) => {
+    try{
+        const newComment = await db.Comment.create(req.body)
+        const newBlog = await db.Blog.findById(`${req.body.blog}`)
+        console.log("NEWBLOG", newBlog)
+        console.log("NEWCOMMENT", newComment)
+        newBlog.comments.push(newComment)
+        await newBlog.save()
+        res.json(newComment)
     } catch(err) {
         console.log(err)
     }
