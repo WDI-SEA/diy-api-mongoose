@@ -20,7 +20,7 @@ app.get('/', (req,res)=> {
 })
 
 app.use('/pokemoncards', require ('./controllers/pokemoncards'))
-
+app.use('/comments', require ('./controllers/comments'))
 // listen on a port
 
 app.listen(PORT, ()=> {
