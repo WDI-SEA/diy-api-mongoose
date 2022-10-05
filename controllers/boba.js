@@ -3,15 +3,15 @@ const router = express.Router()
 const db = require('../models')
 
 //GET /boba -- return array of all the boba drinks
-// router.get('/', async (req, res) => {
-//     try {
-//         const bobas = await db.Boba.find({})
-//         res.json(bobas)
-//     } catch(err) {
-//         console.log(err)
-//         res.status(500).json({ message: 'internal server error '})
-//     }
-// })
+router.get('/', async (req, res) => {
+    try {
+        const bobas = await db.Boba.find({})
+        res.json(bobas)
+    } catch(err) {
+        console.log(err)
+        res.status(500).json({ message: 'internal server error '})
+    }
+})
 
 
 
