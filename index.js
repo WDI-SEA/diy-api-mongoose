@@ -1,5 +1,6 @@
 //  import the required packages
 const express = require('express')
+const mongoose = require('mongoose')
 const cors = require('cors')
 
 // create an instance of an express app

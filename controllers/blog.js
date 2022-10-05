@@ -1,5 +1,5 @@
 const express = require ('express')
-const db = require('./models')
+const db = require('../models')
 const router = express.Router()
 
 // GET /blog -- Return all blogs
@@ -52,4 +52,4 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message : 'internal server error'})
     }
 })
-module.export= router
+module.exports = router
