@@ -1,0 +1,26 @@
+{
+  "name": "diy-api-mongoose",
+  "version": "1.0.0",
+  "description": "## **Deliverable**:",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IanDab47/diy-api-mongoose.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IanDab47/diy-api-mongoose/issues"
+  },
+  "homepage": "https://github.com/IanDab47/diy-api-mongoose#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.4",
+    "morgan": "^1.10.0"
+  }
+}
