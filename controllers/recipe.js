@@ -7,18 +7,20 @@ router.get('/', async (req, res) => {
     try {
         const recipes = await db.Recipe.find({})
         res.json(recipes)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
         res.status(500).json({ message: 'internal server error' })
     }
 })
 
-// GET /recipe/:id -- return a specific recipe
+// GET /recipe/:id -- return a specific recipe w/ comments
 router.get('/:id', async (req, res) => {
     try {
         const oneRecipe = await db.Recipe.findById(req.params.id)
+        const allComments = oneRecipe.comments
         res.json(oneRecipe)
-    } catch(err) {
+
+    } catch (err) {
         console.log(err)
         res.status(500).json({ message: 'internal server error' })
     }
@@ -29,7 +31,28 @@ router.post('/', async (req, res) => {
     try {
         const newRecipe = await db.Recipe.create(req.body)
         res.status(201).json(newRecipe)
-    } catch(err) {
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: 'internal server error' })
+    }
+})
+
+// POST /recipe/:id/comment -- post a new comment on a recipe
+router.post('/:id/comment', async (req, res) => {
+    try {
+        const oneRecipe = await db.Recipe.findById(req.params.id)
+        const newComment = await db.Comment.create({
+            content: req.body.content
+        })
+
+        newComment.recipes.push(oneRecipe)
+        oneRecipe.comments = newComment
+        
+        await newComment.save()
+        await oneRecipe.save()
+
+        res.json(oneRecipe)
+    } catch (err) {
         console.log(err)
         res.status(500).json({ message: 'internal server error' })
     }
@@ -41,7 +64,7 @@ router.put('/:id', async (req, res) => {
         const options = { new: true }
         const updateRecipe = await db.Recipe.findByIdAndUpdate(req.params.id, req.body, options)
         res.json(updateRecipe)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
         res.status(500).json({ message: 'internal server error' })
     }
@@ -52,7 +75,7 @@ router.delete('/:id', async (req, res) => {
     try {
         await db.Recipe.findByIdAndDelete(req.params.id)
         res.sendStatus(204)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
         res.status(500).json({ message: 'internal server error' })
     }

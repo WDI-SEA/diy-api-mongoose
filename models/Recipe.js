@@ -9,6 +9,10 @@ const recipeSchema = new mongoose.Schema({
     },
     directions: {
         type: String
+    },
+    comments: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
     }
 }, {
     timestamps: true

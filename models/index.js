@@ -12,6 +12,6 @@ db.on('error', err => console.warn(`I'm not feeling too good `, err))
 
 // export all of our mongoose models from this file
 module.exports = {
-    Recipe: require('./Recipe')
-
+    Recipe: require('./Recipe'),
+    Comment: require('./Comment')
 }

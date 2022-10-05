@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/recipe', require('./controllers/recipe') )
+app.use('/comment', require('./controllers/comment') )
 
 app.listen(PORT, () => {
     console.log(`listening on PORT: ${PORT}`)
