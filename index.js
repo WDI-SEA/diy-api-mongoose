@@ -16,6 +16,7 @@ app.use(express.json())
 
 // controllers/routes
 app.use('/expenses', require('./controllers/expenses'))
+app.use('/categories', require('./controllers/categories'))
 
 app.get('/', (req, res) => {
     res.json({ message: 'diy api mongoose'})

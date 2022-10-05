@@ -17,5 +17,5 @@ db.on('error', (err) =>  console.warn('the datacenter has burned down', err))
 // export all of our mongoose models from this file 
 module.exports = {
     Expense: require('./Expense'),
-    Cateogory: require('./Category'),
+    Category: require('./Category'),
 }
