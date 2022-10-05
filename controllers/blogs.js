@@ -47,6 +47,23 @@ router.put('/:id', async (req,res) => {
     }
 })
 
+// add comment to blog
+//POST /blogs/:id/
+router.post('/:id', async (req,res) => {
+    try {
+        const blogToComment = db.Blog.findById(req.params.id)
+        const newComment = {
+            name: req.body.name,
+            content: req.body.content
+        }
+        console.log("DATA", blogToComment, newComment)
+        // blogToComment.comments.push(newComment)
+        // await blogToComment.save()
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 // delete one blog post
 router.delete('/:id', async (req,res) => {
     try {
