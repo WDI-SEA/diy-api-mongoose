@@ -67,8 +67,35 @@ router.post('/:id/comments', async (req, res) => {
     try {
         const foundBlog = await db.Blog.findById(req.params.id)
         foundBlog.comments.push(req.body)
-        await blog.save()
-        res.status(201).json(foundblog)
+        await foundBlog.save()
+        res.status(201).json(foundBlog)
+    } catch (error) {
+        console.warn(error)
+        res.status(500).json({ message: "Server error" })
+    }
+})
+
+// PUT /blogs/:id/comments/:cId
+router.put('/:id/comments/:cId', async (req, res) => {
+    try {
+        const foundBlog = await db.Blog.findById(req.params.id)
+        const comment = foundBlog.comments.id(req.params.cId)
+        comment.content = req.body.content
+        await foundBlog.save()
+        res.json(foundBlog)
+    } catch (error) {
+        console.warn(error)
+        res.status(500).json({ message: "Server error" })
+    }
+})
+
+// DELETE /blogs/:id/comments/:cId
+router.delete('/:id/comments/:cId', async (req, res) => {
+    try {
+        const foundBlog = await db.Blog.findById(req.params.id)
+        foundBlog.comments.id(req.params.cId).remove()
+        await foundBlog.save()
+        res.sendStatus(204)
     } catch (error) {
         console.warn(error)
         res.status(500).json({ message: "Server error" })
