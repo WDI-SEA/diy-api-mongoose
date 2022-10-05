@@ -38,6 +38,18 @@ router.get('/:id', async (req, res) => {
 })
 
 // PUT /blogs/:id
+router.put('/:id', async (req, res) => {
+    try {
+        const options= {
+            new: true
+        }
+        const updatedBlog = await db.Blog.findByIdAndUpdate(req.params.id, req.body, options)
+        res.json(updatedBlog)
+    } catch(error) {
+        console.warn(error)
+        res.status(500).json({ message: "Server error" })
+    }
+})
 
 // DELETE /blogs/:id
 
