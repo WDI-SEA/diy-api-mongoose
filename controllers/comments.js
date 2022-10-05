@@ -16,13 +16,14 @@ const db = require('../models')
 // PUT /comment
 router.put('/:id', async (req,res)=> {
     try{
-        const updateComment = await db.Comment.findById(req.params.id)
+        const updateComment = await db.PokemonCard.comments.findById(req.params.id)
         updateComment.header = req.body.header
         updateComment.content = req.body.content
+        res.json(updateComment)
 
     }catch(err){
             console.log(err)
-            res.status(500).json({ message: 'Internal server error'})
+            res.status(500).json({ message: 'Internal server error' })
         }
 })
 

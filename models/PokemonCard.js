@@ -1,15 +1,5 @@
 const mongoose = require('mongoose')
 
-// child
-const CommentSchema = new mongoose.Schema({
-    header: {
-        type: String
-    },
-    content: {
-        type: String
-    }
-})
-
 const PokemonCardSchema = new mongoose.Schema({
     name: {
         type: String
@@ -23,7 +13,10 @@ const PokemonCardSchema = new mongoose.Schema({
     description: {
         type: String
     },
-    comments: [CommentSchema]
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }]
 }, {
     timestamps: true
 })

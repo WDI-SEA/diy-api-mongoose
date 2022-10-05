@@ -15,5 +15,6 @@ db.once('open', ()=> console.log(`mongoDB connected @ ${db.host}:${db.port}`))
 db.on('error', err => console.warn('Charizard has burned down the Pokemon data server...', err))
 
 module.exports = {
-    PokemonCard: require('./PokemonCard')
+    PokemonCard: require('./PokemonCard'),
+    Comment: require('./Comment')
 }

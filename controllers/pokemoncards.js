@@ -36,15 +36,30 @@ router.post('/', async (req,res)=> {
 
 // POST /pokemoncards/:id/comment
 router.post('/:id/comment', async (req,res)=> {
-    const pokemonCard = await db.PokemonCard.findByIdAndUpdate(req.params.id)
-    const newComment = {
-        header: req.body.header,
-        content: req.body.content
+    try{
+
+        const newComment = await db.Comment.create({
+            header: req.body.header,
+            content: req.body.content
+        })
+        const foundPokemonCard = await db.PokemonCard.findByIdAndUpdate(req.params.id)
+
+        newComment.pokemoncards.push(foundPokemonCard)
+        
+        foundPokemonCard.comments.push(newComment)
+        await newComment.save()
+        await foundPokemonCard.save()
+        res.status(201).json(pokemonCard)
+
+    }catch(err){
+        console.log(err)
+        res.status(500).json({ message: 'Internal server error'})
     }
-    pokemonCard.comments.push(newComment)
-    await pokemonCard.save()
-    res.status(201).json(pokemonCard)
+    
 })
+
+
+
 // PUT /pokemoncards/:id
 router.put('/:id', async (req,res)=> {
     try{
