@@ -5,7 +5,7 @@ const db = require('../models')
 // GET '/categories' -- display all categories
 router.get('/', async (req, res) => {
     try{
-        const allCategories = await db.Category.find({})
+        const allCategories = await db.Category.find({}).populate('expenses')
         res.json(allCategories)
 
     }catch(err) {

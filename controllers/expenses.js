@@ -5,7 +5,7 @@ const db = require('../models')
 // GET '/expenses' -- return array of all expenses
 router.get('/', async (req, res) => {
     try{
-        const allExpenses = await db.Expense.find({})
+        const allExpenses = await db.Expense.find({}).populate('category')
         res.json(allExpenses)
 
     }catch(err) {
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
 // GET '/expenses/:id' -- show details for single expense
 router.get('/:id', async (req, res) => {
     try {
-        const expense = await db.Expense.findById(req.params.id)
+        const expense = await db.Expense.findById(req.params.id).populate('category')
         res.json(expense)
 
     }catch(err) {
@@ -55,7 +55,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         await db.Expense.findByIdAndDelete(req.params.id)
-        res.redirect('/expenses')
+        res.sendStatus(204)
 
     }catch(err) {
         console.warn(err)

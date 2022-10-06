@@ -2,9 +2,9 @@ const db = require('./models')
 
 const setCategories = async () => {
     try {
-        const expense = await db.Expense.findOneAndUpdate({}) // only one expense right now
+        const expense = await db.Expense.findOne({ merchant: 'Trader Joes'}) // only one expense right now
 
-        const groceries = await db.Category.findOne({ name: 'groceries' })
+        const groceries = await db.Category.findOne({name:'groceries'})
 
         expense.category = groceries
         
