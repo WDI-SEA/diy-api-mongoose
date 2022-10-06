@@ -11,10 +11,10 @@ app.use(cors())
 app.use(express.json())
 
 app.get("/", (req, res) => {
-    res.json({message: "Welcome to Blog Loblaw's Law Blog!"})
+    res.json({message: "Music to my ears!"})
 })
 
-app.use("/blog", require("./controllers/blog"))
+app.use("/songs", require("./controllers/songs"))
 app.use("/comment", require("./controllers/comment"))
 
 app.listen(PORT, () => {
