@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/fmher/diy-api-mongoose#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "cros": "^1.0.1",
     "express": "^4.18.2",
     "mongoose": "^6.8.4"
