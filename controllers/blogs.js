@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 //GET /blogs/:id show one blog
 router.get('/:id', async (req, res) => {
     try {
-        
+        const updatedBlog = await db.Blog.findByIdAndUpdate(req.params.id, req.body, {new: true})
     } catch (err) {
         console.log(err)
     }
