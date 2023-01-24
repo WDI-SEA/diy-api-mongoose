@@ -19,6 +19,11 @@ router.get('/', async (req, res) => {
         res.json(newBlog)
     } catch (err) {
         console.log(err)
+        if (err.name === "ValidatorError") {
+            res.status(400).json({ msg: err.message })
+        } else {
+            res.status(500).json({ msg: 'The server is burning'})
+        }
         res.json(err)
     }
 })
