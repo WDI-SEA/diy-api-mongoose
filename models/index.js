@@ -12,5 +12,5 @@ db.once('open', () => console.log(`mongoDB has connected @ ${db.host}:${db.port}
 db.on('error', err => console.log('🔥🔥🔥 datacenter burned to ground:', err))
 
 module.exports = {
-    blog: require('./blog')
+    Blog: require('./Blog')
 }
