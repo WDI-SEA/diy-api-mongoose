@@ -5,6 +5,7 @@ const db = require('../models')
 // GET /blogs -- READ all blogs
 router.get('/', async (req, res) => {
     res.json({ msg: 'show all blogs' })
+    res.json({ msg: 'show all blogs' })
 })
 
 // GET /blogs/:id -- READ single blog
