@@ -3,13 +3,16 @@ const mongoose = require('mongoose')
 const BlogSchema = new mongoose.Schema({
     
     name: {
-        type: String 
+        type: String ,
+        required: true
     },
     title: {
-        type: String 
+        type: String,
+        required: true
     },
     content: {
-        type: String 
+        type: String,
+        required: true
     }
 }, {
     timestamps: true 

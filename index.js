@@ -19,7 +19,7 @@ app.get('/',(req, res)=>{
     res.json({msg: 'Welcome to the blog API'})
 })
 
-app.use('/blog', require('./controllers/blogs'))
+app.use('/blogs', require('./controllers/blogs'))
 
 //listen on a port for incoming requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
