@@ -26,7 +26,7 @@ How we make it work:
 | column name | type |
 |:-----------:|:----:|
 |name | string |
-|title | integer |
+|title | string |
 |content | string |
 
 
