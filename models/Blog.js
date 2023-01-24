@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+// MONGOOSE DB ADN FILE MUST BE CAPPED, UPPERCASE
 
 const BlogSchema = new mongoose.Schema({
     name: {

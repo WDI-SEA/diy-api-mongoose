@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
     res.json({ msg: 'Welcome To the Blog '})
 })
 
+app.get('/blog', require('./controllers/blog'))
 
 
 app.listen(PORT, () => console.log(`Blog on ${PORT}`))
