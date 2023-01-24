@@ -6,9 +6,9 @@ const db = require('../models')
 
 router.get('/', async (req, res) => {
     try {
-        // get all bounties from the db
+        
         const allBlogs = await db.Blog.find()
-        // send the bounties back to the client
+        
         res.json(allBlogs)
         res.status(201).json(allBlogs)
     } catch (error) {
