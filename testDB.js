@@ -3,9 +3,9 @@ const db = require('./models')
 const blogCRUD = async () => {
     try {
         const newBlog = await db.Blog.create({
-            name: 'Eric Nguyen',
-            title: 2,
-            content: 'currently getting hunted down by bounty hunter Josh and Tyler'
+            name: 'Daniel Park',
+            title: 'Sleep',
+            content: 'Unintentionally staying up and ends up needing energy drink to stay up through the class'
         })
     } catch (err) {
         console.log('🔥🔥🔥🔥🔥Burning!!!🔥🔥🔥🔥🔥', err)
