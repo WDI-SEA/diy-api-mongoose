@@ -4,13 +4,13 @@ const db = require('./models')
 
 const test = async () =>{
      try {
-        const newPlayer = await db.Futbol.create({
-            name: 'Ronaldo',
-            club: 'Al-Nassr',
-            country: 'Portugal',
-            age: '37',
-            rating: '8'
-        })
+        // const newPlayer = await db.Futbol.create({
+        //     name: 'Ronaldo',
+        //     club: 'Al-Nassr',
+        //     country: 'Portugal',
+        //     age: '37',
+        //     rating: '8'
+        // })
         const soccer = await db.Futbol.find({
 
         })
