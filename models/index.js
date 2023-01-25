@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const dbName = 'ConstellationsAPI'
 
-const url = `mongodb://localhost:27017/${dbName}`
+const uri = `mongodb://localhost:27017/${dbName}`
 
-mongoose.connect(url)
+mongoose.connect(uri)
 
 const db = mongoose.connection
 

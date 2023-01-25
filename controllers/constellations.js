@@ -6,11 +6,14 @@ const db = require('../models')
 router.get('/', async (req,res) => {
     try {
         const allConstellations = await db.Constellation.find({})
-        res.json({message: "test GET all route"})
-        // res.json(allConstellations)
+        res.json(allConstellations)
     } catch (err) {
         console.log(err)
+        if (err.name === "ValidatorError") {
+            res.status(400).json({msg: err.message})
+        } else {
         res.status(500).json({ message: 'Sad, something went wrong!' })
+        }
     }
 })
 
@@ -22,8 +25,7 @@ router.get('/:id', async (rew,res) => {
             res.status(404).json({ message: 'Sad, constellation not found' })
             return
         }
-        res.json({message: "test GET specific route"})
-        // res.json(specificConstellation)
+        res.json(specificConstellation)
     } catch (err) {
         console.log(err)
         if (err.kind === "ObjectId") {
@@ -37,8 +39,7 @@ router.get('/:id', async (rew,res) => {
 router.post('/', async (req,res) => {
     try {
         const newConstellation = await db.Constellation.create(req.body)
-        res.json({message: "test POST route"})
-        // res.json(newConstellation)
+        res.json(newConstellation)
     } catch (error) {
         console.log(error)
         res.status(500).json({msg: 'Internal Server Error, Contact the System Administrator'})
@@ -49,8 +50,7 @@ router.post('/', async (req,res) => {
 router.put('/:id', async (req,res) => {
     try {
         const updatedConstellation = await db.Constellation.findByIdAndUpdate(req.params.id, req.body, {new: true})
-        res.json({message: "test PUT route"})
-        // res.json(updatedConstellation)
+        res.json(updatedConstellation)
     } catch (err) {
         console.log(err)
         if (err.kind === "ObjectId") {
@@ -68,8 +68,7 @@ router.delete('/:id', async (req,res) => {
         if (!deletedConstellation) {
             res.status(404).json({ message: 'Sad, constellation not found' })
         }
-        res.json({message: "test DELETE route"})
-        // res.sendStatus(204)
+        res.sendStatus(204)
     } catch (err) {
         console.log(err)
         if (err.kind === "ObjectId") {
