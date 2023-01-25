@@ -33,7 +33,7 @@ export default function Home (){
       })
       const blogDetails = blogs.find(blog=> blog._id === details)
       const detailPane = blogDetails ? <BlogDetails blog={blogDetails} handleClick={handleClick}/>: 'Click on a blog'
-      const sidePane = showForm ? <EditBlog handleClick={handleClick} blog={blogDetails}/>:detailPane
+      const sidePane = showForm ? <EditBlog handleClick={handleClick} blog={blogDetails} setBlogs={setBlogs}/>:detailPane
 
     return(
         <div style={{ display: "flex" }}>

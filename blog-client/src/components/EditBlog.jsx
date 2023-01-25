@@ -8,13 +8,26 @@ export default function EditBlog (props){
     })
 
     const handleSubmit = async e =>{
+        e.preventDefault()
         try{
-
+            await axios.put(`${process.env.REACT_APP_SERVER_URL}/blogs/${props.blog._id}`, form)
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/blogs`)
+            props.setBlogs(response.data)
+            props.handleClick()
         }catch(err){
             console.log(err)
         }
     }
-  
+  const handleDelete = async ()=>{
+    try{
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/blogs/${props.blog._id}`)
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/blogs`)
+        props.setBlogs(response.data)
+        props.handleClick()
+    }catch(err){
+        console.log(err)
+    }
+  }
 
     return(
         <>
@@ -49,6 +62,7 @@ export default function EditBlog (props){
         </div>
         <button type="submit">Submit</button>
     </form>
+    <button onClick={handleDelete}>Delete</button>
     <button onClick={props.handleClick}>Cancel</button>
         </>
     )
