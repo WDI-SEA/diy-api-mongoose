@@ -1,0 +1,23 @@
+ 5144  git clone https://github.com/andrewbantly/diy-api-mongoose.git
+ 5145  cd diy-api-mongoose
+ 5146  npm init -y
+ 5147  echo node_modules >> .gitignore
+ 5148* cd seir-306/unit3
+ 5149* ls
+ 5150* cd bounty-hunter-server
+ 5151  code .
+ 5152  brew services ls
+ 5153  npm i mongoose
+ 5154  touch index.js
+ 5155  mkdir models
+ 5156  touch models/index.js models/Blog.js
+ 5157  touch testDb.js
+ 5158  npm i express
+ 5159  npm i cors
+ 5160  node testDb.js
+ 5161* mongosh
+ 5162  node testDb.js
+ 5163  mkdir controllers
+ 5164  touch blog.js
+ 5165  mv blog.js controllers/blog.js
+ 5166* nodemon
