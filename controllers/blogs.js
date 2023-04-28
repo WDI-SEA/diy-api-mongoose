@@ -21,25 +21,32 @@ router.post("/", async (req, res) => {
     res.json({ result: newBlog })
   } catch (error) {
     console.log(error)
-    res.status(500).json({ message: "internal Server Error" })
+    if (error.name === "validationError") {
+      res.status(400).json({ message: error.message })
+    } else {
+      res.status(500).json({ message: "internal Server Error" })
+    }
   }
 })
 
-//GET /blogs/:id -- SHOW one blog post
+//GET /blogs/:id -- READ one blog post
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params
     const foundBlog = await db.Blog.findById(id)
-    
-    res.json({ result: foundBlog })
 
+    if (!foundBlog) {
+      console.log("blog was not found")
+      res.status(404).json({message: "Blog not found"})
+    }
+    res.json({ result: foundBlog })
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: "Internal server error" })
   }
 })
 
-//PUT /blogs/:id -- UPDATA one blog post
+//PUT /blogs/:id -- UPDATE one blog post
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params
@@ -60,7 +67,7 @@ router.delete("/:id", async (req, res) => {
     const { id } = req.params
     await db.Blog.findByIdAndDelete(id)
 
-    res.sendStatus(204) 
+    res.sendStatus(204)
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: "internal Server Error" })
