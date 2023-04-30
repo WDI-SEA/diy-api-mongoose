@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const db = require("../models")
 
-// GET /blog -- READ list all blog posts
+// GET /posts -- READ list all blog posts
 router.get("/", async (req, res) => {
     try {
         const allPosts = await db.Post.find({})
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-// POST /blog -- CREATE a new blog post
+// POST /posts -- CREATE a new blog post
 router.post("/", async (req, res) => {
     try {
         const newPost = await db.Post.create(req.body)
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-// GET /blog/:id -- READ a specific blog post
+// GET /posts/:id -- READ a specific blog post
 router.get("/:id", async (req, res) => {
     try {
         const { id } = req.params
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-// PUT /blog/:id -- UPDATE a specific blog post
+// PUT /posts/:id -- UPDATE a specific blog post
 router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params
@@ -48,7 +48,7 @@ router.put("/:id", async (req, res) => {
     }
 })
 
-// DELETE /blog/:id -- DESTROY a specific blog post
+// DELETE /posts/:id -- DESTROY a specific blog post
 router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params
